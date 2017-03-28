@@ -1850,12 +1850,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:freddiefrantzen/simplex.git",
-                "reference": "679d6972eb15d0af5179fe6e927f36c2c1f1f542"
+                "reference": "45e50fa814a15ba4c40e21f4f6e301238d0ec631"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/679d6972eb15d0af5179fe6e927f36c2c1f1f542",
-                "reference": "679d6972eb15d0af5179fe6e927f36c2c1f1f542",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/45e50fa814a15ba4c40e21f4f6e301238d0ec631",
+                "reference": "45e50fa814a15ba4c40e21f4f6e301238d0ec631",
                 "shasum": ""
             },
             "require": {
@@ -1895,7 +1895,7 @@
                 "source": "https://github.com/freddiefrantzen/simplex/tree/master",
                 "issues": "https://github.com/freddiefrantzen/simplex/issues"
             },
-            "time": "2017-03-28 21:17:37"
+            "time": "2017-03-28 21:56:20"
         },
         {
             "name": "symfony/cache",

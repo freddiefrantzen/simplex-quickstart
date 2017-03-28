@@ -54,7 +54,7 @@ class FunctionalTest extends TestCase
     public function getKernel()
     {
         if (!isset(self::$kernel)) {
-            self::$kernel = new Kernel();
+            self::$kernel = new Kernel(__DIR__ . '/../../../');
             self::$kernel->boot();
         }
 

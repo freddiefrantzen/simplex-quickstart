@@ -1,8 +1,8 @@
 <?php
 
-use Frantzen\Framework\Core\HttpMiddleware\MatchRoute;
-use Frantzen\Framework\Core\HttpMiddleware\DispatchController;
-use Frantzen\Framework\Core\HttpMiddleware\SetJsonResponseHeaders;
+use Simplex\HttpMiddleware\MatchRoute;
+use Simplex\HttpMiddleware\DispatchController;
+use Simplex\HttpMiddleware\SetJsonResponseHeaders;
 
 return [
 
