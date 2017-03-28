@@ -9,11 +9,4 @@ use Mockery as m;
 class UnitTest extends TestCase
 {
     use Psr7Assertions;
-
-    protected function tearDown()
-    {
-        m::close();
-
-        parent::tearDown();
-    }
 }

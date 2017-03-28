@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "621c201feff44983f7c5ccee932f1541",
+    "content-hash": "fbfcfad28d456b9f53ef2782d3664c7b",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -697,75 +697,6 @@
             "time": "2016-12-18T15:42:34+00:00"
         },
         {
-            "name": "fgrosse/phpasn1",
-            "version": "1.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fgrosse/PHPASN1.git",
-                "reference": "a18b162eca6aa70f8f15615f4ac8c852dffbc7dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fgrosse/PHPASN1/zipball/a18b162eca6aa70f8f15615f4ac8c852dffbc7dd",
-                "reference": "a18b162eca6aa70f8f15615f4ac8c852dffbc7dd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gmp": "*",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "suggest": {
-                "php-curl": "For loading OID information from the web if they have not bee defined statically"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FG\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Friedrich Große",
-                    "email": "friedrich.grosse@gmail.com",
-                    "homepage": "https://github.com/FGrosse",
-                    "role": "Author"
-                },
-                {
-                    "name": "All contributors",
-                    "homepage": "https://github.com/FGrosse/PHPASN1/contributors"
-                }
-            ],
-            "description": "A PHP Framework that allows you to encode and decode arbitrary ASN.1 structures using the ITU-T X.690 Encoding Rules.",
-            "homepage": "https://github.com/FGrosse/PHPASN1",
-            "keywords": [
-                "DER",
-                "asn.1",
-                "asn1",
-                "ber",
-                "binary",
-                "decoding",
-                "encoding",
-                "x.509",
-                "x.690",
-                "x509",
-                "x690"
-            ],
-            "time": "2016-10-29T15:46:46+00:00"
-        },
-        {
             "name": "filp/whoops",
             "version": "2.1.8",
             "source": {
@@ -1097,72 +1028,6 @@
             "time": "2016-10-19T09:02:03+00:00"
         },
         {
-            "name": "mdanter/ecc",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpecc/phpecc.git",
-                "reference": "d8e34259357260ff74a07fd7550cb43cf0fd8aa9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpecc/phpecc/zipball/d8e34259357260ff74a07fd7550cb43cf0fd8aa9",
-                "reference": "d8e34259357260ff74a07fd7550cb43cf0fd8aa9",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gmp": "*",
-                "fgrosse/phpasn1": "~1.5",
-                "paragonie/random_compat": "1.4.1|2.0.2",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.1|~5.0",
-                "squizlabs/php_codesniffer": "~2",
-                "symfony/yaml": "~2.6|~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Mdanter\\Ecc\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matyas Danter",
-                    "homepage": "http://matejdanter.com/",
-                    "role": "Author"
-                },
-                {
-                    "name": "Thibaud Fabre",
-                    "email": "thibaud@aztech.io",
-                    "homepage": "http://aztech.io",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "PHP Elliptic Curve Cryptography library",
-            "homepage": "https://github.com/phpecc/phpecc",
-            "keywords": [
-                "Diffie",
-                "ECDSA",
-                "Hellman",
-                "curve",
-                "ecdh",
-                "elliptic",
-                "nistp192",
-                "nistp224",
-                "nistp256",
-                "nistp521",
-                "phpecc",
-                "secp256k1"
-            ],
-            "time": "2016-06-26T18:37:24+00:00"
-        },
-        {
             "name": "netresearch/jsonmapper",
             "version": "v1.1.1",
             "source": {
@@ -1318,16 +1183,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.2",
+            "version": "v2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
                 "shasum": ""
             },
             "require": {
@@ -1362,7 +1227,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03T06:00:07+00:00"
+            "time": "2017-03-13T16:27:32+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -1985,22 +1850,20 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:freddiefrantzen/simplex.git",
-                "reference": "88563c6c61299d6e276ed3a4bb086edab19b3218"
+                "reference": "679d6972eb15d0af5179fe6e927f36c2c1f1f542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/88563c6c61299d6e276ed3a4bb086edab19b3218",
-                "reference": "88563c6c61299d6e276ed3a4bb086edab19b3218",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/679d6972eb15d0af5179fe6e927f36c2c1f1f542",
+                "reference": "679d6972eb15d0af5179fe6e927f36c2c1f1f542",
                 "shasum": ""
             },
             "require": {
                 "doctrine/annotations": "^1.4",
                 "doctrine/cache": "^1.6",
                 "doctrine/orm": "^2.5",
-                "ext-gmp": "*",
                 "filp/whoops": "^2.1",
                 "lukasoppermann/http-status": "^2.0",
-                "mdanter/ecc": "0.4.0",
                 "ocramius/proxy-manager": "^2.1",
                 "php-di/php-di": "^5.4",
                 "relay/relay": "^1.1",
@@ -2032,7 +1895,7 @@
                 "source": "https://github.com/freddiefrantzen/simplex/tree/master",
                 "issues": "https://github.com/freddiefrantzen/simplex/issues"
             },
-            "time": "2017-03-28 19:52:42"
+            "time": "2017-03-28 21:17:37"
         },
         {
             "name": "symfony/cache",
