@@ -1,0 +1,46 @@
+{
+    "name": "simplex/quickstart",
+    "authors": [
+        {
+            "name": "freddiefrantzen",
+            "email": "freddie@freddiefrantzen.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Simplex\\Quickstart\\": "src"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/freddiefrantzen/simplex"
+        }
+    ],
+    "require": {
+        "simplex/simplex": "dev-master",
+        "doctrine/data-fixtures": "^1.2",
+        "doctrine/orm": "^2.5",
+        "league/tactician": "^1.0",
+        "netresearch/jsonmapper": "^1.1",
+        "ramsey/uuid-doctrine": "^1.2",
+        "willdurand/hateoas": "^2.10"
+    },
+    "require-dev": {
+        "guzzlehttp/psr7": "^1.4",
+        "helmich/phpunit-psr7-assert": "^2.0",
+        "mockery/mockery": "^0.9.9",
+        "phpunit/phpunit": "^6.0",
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "scripts": {
+        "test": "phpunit --colors=always",
+        "run": "php -S 0.0.0.0:8080 -t public public/app.php",
+        "cc": "rm -R cache/*",
+        "reload-db": [
+            "bin/console orm:schema-tool:drop --force",
+            "bin/console orm:schema-tool:create",
+            "bin/console app:load-fixtures"
+        ]
+    }
+}
