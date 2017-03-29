@@ -11,12 +11,6 @@
             "Simplex\\Quickstart\\": "src"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/freddiefrantzen/simplex"
-        }
-    ],
     "require": {
         "php": ">=7.1",
         "simplex/simplex": "dev-master",
