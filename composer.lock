@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "421ed7b373429434cdfa22ac176370fa",
+    "content-hash": "3e0527bccb87b9eb951e067ef6c1deb2",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1850,12 +1850,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:freddiefrantzen/simplex.git",
-                "reference": "0eb669db39f7195bcfa3e8e503feb338b9b0a163"
+                "reference": "88505f60c589fc83e0c7ac27cc121c892802a931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/0eb669db39f7195bcfa3e8e503feb338b9b0a163",
-                "reference": "0eb669db39f7195bcfa3e8e503feb338b9b0a163",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/88505f60c589fc83e0c7ac27cc121c892802a931",
+                "reference": "88505f60c589fc83e0c7ac27cc121c892802a931",
                 "shasum": ""
             },
             "require": {
@@ -1864,6 +1864,7 @@
                 "filp/whoops": "^2.1",
                 "lukasoppermann/http-status": "^2.0",
                 "ocramius/proxy-manager": "^2.1",
+                "php": ">=7.1",
                 "php-di/php-di": "^5.4",
                 "relay/relay": "^1.1",
                 "symfony/config": "^3.2",
@@ -1894,7 +1895,7 @@
                 "source": "https://github.com/freddiefrantzen/simplex/tree/master",
                 "issues": "https://github.com/freddiefrantzen/simplex/issues"
             },
-            "time": "2017-03-29 13:01:54"
+            "time": "2017-03-29 16:12:01"
         },
         {
             "name": "symfony/cache",
@@ -4432,6 +4433,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1"
+    },
     "platform-dev": []
 }
