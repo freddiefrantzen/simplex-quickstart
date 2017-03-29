@@ -11,7 +11,7 @@ abstract class AppController extends Controller
     /** @var CommandBus */
     private $commandBus;
 
-    public function setCommandBus(CommandBus $commandBus)
+    public function setCommandBus(CommandBus $commandBus): void
     {
         $this->commandBus = $commandBus;
     }
@@ -27,7 +27,7 @@ abstract class AppController extends Controller
         return $command;
     }
 
-    public function handleCommand($command)
+    public function handleCommand($command): void
     {
         $this->commandBus->handle($command);
     }

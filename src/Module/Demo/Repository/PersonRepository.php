@@ -30,7 +30,7 @@ class PersonRepository extends EntityRepository
         return $person;
     }
 
-    public function save(Person $person)
+    public function save(Person $person): void
     {
         $this->getEntityManager()->persist($person);
         $this->getEntityManager()->flush($person);

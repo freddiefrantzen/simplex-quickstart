@@ -18,7 +18,7 @@ class FixtureLoader
         $this->entityManager = $entityManager;
     }
 
-    public function load()
+    public function load(): void
     {
         $loader = new Loader();
         $loader->addFixture(new PersonLoader());

@@ -9,4 +9,11 @@ use PHPUnit\Framework\TestCase;
 class UnitTest extends TestCase
 {
     use Psr7Assertions;
+
+    protected function tearDown()
+    {
+        m::close();
+
+        parent::tearDown();
+    }
 }

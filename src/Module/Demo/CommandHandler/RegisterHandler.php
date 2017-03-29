@@ -18,7 +18,7 @@ class RegisterHandler
         $this->orm = $orm;
     }
 
-    public function handle(Register $command)
+    public function handle(Register $command): void
     {
         $person = Person::register($command->name, $command->email, $command->password);
 

@@ -51,7 +51,7 @@ class FunctionalTest extends TestCase
         return new HttpRequest($this->getKernel());
     }
 
-    public function getKernel()
+    public function getKernel(): Kernel
     {
         if (!isset(self::$kernel)) {
             self::$kernel = new Kernel(__DIR__ . '/../../../');

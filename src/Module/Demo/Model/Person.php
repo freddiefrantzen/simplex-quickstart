@@ -50,12 +50,14 @@ class Person
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Exclude()
      */
     private $passwordHash;
 
     private function __construct() {}
 
-    public static function register(string $name, string $email, string $password)
+    public static function register(string $name, string $email, string $password): Person
     {
         $person = new self();
 
@@ -72,21 +74,6 @@ class Person
         return $this->id;
     }
 
-    public function getAppId(): string
-    {
-        return $this->id;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
-
-    public function getPasswordHash(): string
-    {
-        return $this->passwordHash;
-    }
-
     public function getName(): string
     {
         return $this->name;
@@ -95,5 +82,10 @@ class Person
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getPasswordHash(): string
+    {
+        return $this->passwordHash;
     }
 }

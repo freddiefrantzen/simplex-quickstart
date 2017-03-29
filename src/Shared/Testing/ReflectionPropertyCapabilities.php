@@ -9,7 +9,7 @@ trait ReflectionPropertyCapabilities
      * @param string $propertyName
      * @param $propertyValue
      */
-    private function setProperty($object, string $propertyName, $propertyValue)
+    private function setProperty($object, string $propertyName, $propertyValue): void
     {
         $refObject = new \ReflectionObject($object);
 
