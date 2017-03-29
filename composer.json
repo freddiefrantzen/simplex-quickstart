@@ -38,7 +38,7 @@
         "run": "php -S 0.0.0.0:8080 -t public public/app.php",
         "cc": "rm -R cache/*",
         "init-db": [
-            "bin/console orm:database:create",
+            "bin/console orm:database:create --if-not-exists",
             "bin/console orm:schema-tool:create",
             "bin/console app:load-fixtures"
         ],
