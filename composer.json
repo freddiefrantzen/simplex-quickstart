@@ -23,8 +23,7 @@
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",
         "netresearch/jsonmapper": "^1.1",
-        "ramsey/uuid-doctrine": "^1.2",
-        "willdurand/hateoas": "^2.10"
+        "ramsey/uuid-doctrine": "^1.2"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.4",
