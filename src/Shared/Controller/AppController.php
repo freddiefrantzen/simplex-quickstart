@@ -2,9 +2,9 @@
 
 namespace Simplex\Quickstart\Shared\Controller;
 
-use Simplex\Controller;
 use League\Tactician\CommandBus;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Simplex\Controller;
 
 abstract class AppController extends Controller
 {

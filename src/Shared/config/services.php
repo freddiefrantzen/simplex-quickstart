@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\SerializerInterface;
-use Simplex\Quickstart\Shared\Factory\SerializerFactory;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Simplex\Quickstart\Shared\Factory\DoctrineOrmFactory;
-use Simplex\Quickstart\Shared\Console\LoadFixturesCommand;
-use Simplex\Quickstart\Shared\Testing\FixtureLoader;
-use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
 use League\Tactician\CommandBus;
+use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
+use Simplex\Quickstart\Shared\Console\LoadFixturesCommand;
 use Simplex\Quickstart\Shared\Factory\CommandBusFactory;
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Simplex\Quickstart\Shared\Factory\DoctrineOrmFactory;
+use Simplex\Quickstart\Shared\Factory\SerializerFactory;
+use Simplex\Quickstart\Shared\Testing\FixtureLoader;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
 

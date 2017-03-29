@@ -3,8 +3,8 @@
 namespace Simplex\Quickstart\Module\Demo\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Simplex\Quickstart\Module\Demo\Model\Person;
 use Simplex\Exception\ResourceNotFoundException;
+use Simplex\Quickstart\Module\Demo\Model\Person;
 
 class PersonRepository extends EntityRepository
 {

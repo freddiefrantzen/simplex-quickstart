@@ -4,9 +4,9 @@ namespace Simplex\Quickstart\Module\Demo\DataFixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Ramsey\Uuid\Uuid;
 use Simplex\Quickstart\Module\Demo\Model\Person;
 use Simplex\Quickstart\Shared\Testing\ReflectionPropertyCapabilities;
-use Ramsey\Uuid\Uuid;
 
 class PersonLoader extends AbstractFixture
 {

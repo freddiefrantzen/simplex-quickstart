@@ -2,8 +2,8 @@
 
 namespace Simplex\Quickstart\Module\Demo\Test\Unit;
 
-use Simplex\Quickstart\Shared\Testing\UnitTest;
 use Simplex\Quickstart\Module\Demo\Model\Person;
+use Simplex\Quickstart\Shared\Testing\UnitTest;
 
 class PersonTest extends UnitTest
 {

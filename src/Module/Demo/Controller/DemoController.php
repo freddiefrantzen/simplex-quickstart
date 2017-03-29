@@ -2,12 +2,12 @@
 
 namespace Simplex\Quickstart\Module\Demo\Controller;
 
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Simplex\Quickstart\Module\Demo\Command\Register;
 use Simplex\Quickstart\Module\Demo\Repository\PersonRepository;
 use Simplex\Quickstart\Shared\Controller\AppController;
 use Symfony\Component\Routing\Annotation\Route;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 
 class DemoController extends AppController
 {

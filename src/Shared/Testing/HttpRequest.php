@@ -2,10 +2,10 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
 use Simplex\Kernel;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Diactoros\Stream;

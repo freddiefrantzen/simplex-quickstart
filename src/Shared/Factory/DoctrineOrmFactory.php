@@ -5,12 +5,12 @@ namespace Simplex\Quickstart\Shared\Factory;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Ramsey\Uuid\Doctrine\UuidType;
 use Symfony\Component\Finder\Finder;
-use Doctrine\DBAL\Types\Type;
 
 class DoctrineOrmFactory
 {

@@ -2,9 +2,9 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
-use PHPUnit\Framework\TestCase;
 use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
 class UnitTest extends TestCase
 {

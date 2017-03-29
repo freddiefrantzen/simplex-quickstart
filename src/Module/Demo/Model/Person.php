@@ -3,8 +3,8 @@
 namespace Simplex\Quickstart\Module\Demo\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 use Hateoas\Configuration\Annotation as Hateoas;
+use JMS\Serializer\Annotation as Serializer;
 use Ramsey\Uuid\Uuid;
 
 /**

@@ -2,12 +2,12 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
-use Simplex\Kernel;
 use Helmich\JsonAssert\JsonAssertions;
 use Helmich\Psr7Assert\Psr7Assertions;
-use PHPUnit\Framework\TestCase;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Simplex\Kernel;
 
 class FunctionalTest extends TestCase
 {
