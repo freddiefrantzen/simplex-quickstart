@@ -11,3 +11,8 @@ machine:
 database:
     override:
         - composer init-db
+
+test:
+    override:
+        - vendor/bin/phpunit -c=simplex-quickstart/vendor/simplex/simplex/phpunit.xml.dist
+        - vendor/bin/phpunit
