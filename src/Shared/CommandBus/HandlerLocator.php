@@ -2,8 +2,8 @@
 
 namespace Simplex\Quickstart\Shared\CommandBus;
 
-use Interop\Container\ContainerInterface;
 use League\Tactician\Handler\Locator\HandlerLocator as LocatorInterface;
+use Psr\Container\ContainerInterface;
 
 class HandlerLocator implements LocatorInterface
 {

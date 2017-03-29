@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Simplex\Quickstart\Module\Demo\Controller\DemoController;
 use Simplex\Quickstart\Module\Demo\Repository\PersonRepository;
 

@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use Interop\Container\ContainerInterface;
 use JMS\Serializer\SerializerInterface;
 use League\Tactician\CommandBus;
+use Psr\Container\ContainerInterface;
 use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
 use Simplex\Quickstart\Shared\Console\LoadFixturesCommand;
 use Simplex\Quickstart\Shared\Factory\CommandBusFactory;

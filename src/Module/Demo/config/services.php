@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Simplex\Quickstart\Module\Demo\CommandHandler\RegisterHandler;
 use Simplex\Quickstart\Module\Demo\Console\DemoCommand;
 use Simplex\Quickstart\Module\Demo\Model\Person;
