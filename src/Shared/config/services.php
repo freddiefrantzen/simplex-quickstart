@@ -1,9 +1,12 @@
-<?php declare(strict_types=1);
+<?php
 
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use JMS\Serializer\SerializerInterface;
 use League\Tactician\CommandBus;
 use Psr\Container\ContainerInterface;
 use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
+use Simplex\Quickstart\Shared\Console\CreateDatabaseCommand;
+use Simplex\Quickstart\Shared\Console\DropDatabaseCommand;
 use Simplex\Quickstart\Shared\Console\LoadFixturesCommand;
 use Simplex\Quickstart\Shared\Factory\CommandBusFactory;
 use Simplex\Quickstart\Shared\Factory\DoctrineOrmFactory;
@@ -27,12 +30,34 @@ return [
         return new LoadFixturesCommand($c->get(FixtureLoader::class));
     },
 
+    CreateDatabaseCommand::class => function(ContainerInterface $c) {
+        return new CreateDatabaseCommand(
+            $c->get('db.host'),
+            $c->get('db.port'),
+            $c->get('db.name'),
+            $c->get('db.user'),
+            $c->get('db.pass')
+        );
+    },
+
+    DropDatabaseCommand::class => function(ContainerInterface $c) {
+        return new DropDatabaseCommand(
+            $c->get('db.host'),
+            $c->get('db.port'),
+            $c->get('db.name'),
+            $c->get('db.user'),
+            $c->get('db.pass')
+        );
+    },
+
     HandlerLocator::class => function(ContainerInterface $c) {
         return new HandlerLocator($c);
     },
 
     'console_commands' => DI\add([
         DI\get(LoadFixturesCommand::class),
+        DI\get(CreateDatabaseCommand::class),
+        DI\get(DropDatabaseCommand::class),
 
         // DBAL Commands
         new \Doctrine\DBAL\Tools\Console\Command\RunSqlCommand(),
