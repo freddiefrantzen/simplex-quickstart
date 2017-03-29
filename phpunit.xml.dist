@@ -15,6 +15,10 @@
             <directory>src/Module/Demo/Test/Functional</directory>
         </testsuite>
 
+        <testsuite name="core">
+            <directory>vendor/simplex/simplex/tests</directory>
+        </testsuite>
+
     </testsuites>
 
 </phpunit>
