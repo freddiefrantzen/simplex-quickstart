@@ -14,5 +14,5 @@ database:
 
 test:
     override:
-        - vendor/bin/phpunit -c=vendor/simplex/simplex/phpunit.xml.dist
+        - vendor/bin/phpunit -c vendor/simplex/simplex/phpunit.xml.dist
         - vendor/bin/phpunit
