@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e0527bccb87b9eb951e067ef6c1deb2",
+    "content-hash": "f0064bb604ec2cb158151cd326320566",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1849,13 +1849,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:freddiefrantzen/simplex.git",
-                "reference": "db1b13d7c06a23436504c6a8c7102d83b9cff3a9"
+                "url": "https://github.com/freddiefrantzen/simplex.git",
+                "reference": "38eafb39b0674b6c94922967cacc589968877aa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/db1b13d7c06a23436504c6a8c7102d83b9cff3a9",
-                "reference": "db1b13d7c06a23436504c6a8c7102d83b9cff3a9",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/38eafb39b0674b6c94922967cacc589968877aa8",
+                "reference": "38eafb39b0674b6c94922967cacc589968877aa8",
                 "shasum": ""
             },
             "require": {
@@ -1885,17 +1885,14 @@
                     "Simplex\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Freddie Frantzen",
                     "email": "freddie@freddiefrantzen.com"
                 }
             ],
-            "support": {
-                "source": "https://github.com/freddiefrantzen/simplex/tree/master",
-                "issues": "https://github.com/freddiefrantzen/simplex/issues"
-            },
-            "time": "2017-03-29 18:10:26"
+            "time": "2017-03-29 20:45:20"
         },
         {
             "name": "symfony/cache",
