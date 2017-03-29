@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
 use Simplex\Quickstart\Module\Demo\CommandHandler\RegisterHandler;
 use Simplex\Quickstart\Module\Demo\Console\DemoCommand;
@@ -17,11 +18,11 @@ return [
     ]),
 
     RegisterHandler::class => function(ContainerInterface $c) {
-        return new RegisterHandler($c->get('orm'));
+        return new RegisterHandler($c->get(EntityManager::class));
     },
 
     PersonRepository::class => function(ContainerInterface $c) {
-        return $c->get('orm')->getRepository(Person::class);
+        return $c->get(EntityManager::class)->getRepository(Person::class);
     },
 ];
 

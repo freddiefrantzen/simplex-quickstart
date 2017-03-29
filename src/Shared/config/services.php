@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use JMS\Serializer\SerializerInterface;
 use League\Tactician\CommandBus;
@@ -23,7 +24,7 @@ return [
     ]),
 
     FixtureLoader::class => function(ContainerInterface $c) {
-        return new FixtureLoader($c->get('orm'));
+        return new FixtureLoader($c->get(EntityManager::class));
     },
 
     LoadFixturesCommand::class => function(ContainerInterface $c) {
@@ -82,7 +83,7 @@ return [
         new \Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand(),
     ]),
 
-    'orm' => DI\factory([DoctrineOrmFactory::class, 'create'])
+    EntityManager::class => DI\factory([DoctrineOrmFactory::class, 'create'])
         ->parameter('host', DI\get('db.host'))
         ->parameter('port', DI\get('db.port'))
         ->parameter('name', DI\get('db.name'))
@@ -92,8 +93,7 @@ return [
         ->parameter('debugMode', DI\get('debug_mode')),
 
     'console_helper_set' => function (ContainerInterface $c) {
-        $entityManager = $c->get('orm');
-        $ormHelperSet = ConsoleRunner::createHelperSet($entityManager);
+        $ormHelperSet = ConsoleRunner::createHelperSet($c->get(EntityManager::class));
         return $ormHelperSet;
     },
 
