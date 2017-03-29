@@ -1,0 +1,13 @@
+machine:
+    php:
+        version: 7.1.0
+    environment:
+        FRAMEWORK_ENV: prod
+        FRAMEWORK_DEBUG: 0
+        DATABASE_NAME: simplex
+        DATABASE_USER: admin
+        DATABASE_PASS:
+
+database:
+    override:
+        - composer init-db
