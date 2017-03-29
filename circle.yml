@@ -11,3 +11,7 @@ machine:
 database:
     override:
         - composer init-db
+
+test:
+    override:
+        - vendor/bin/phpunit
