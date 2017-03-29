@@ -5,7 +5,7 @@ machine:
         FRAMEWORK_ENV: prod
         FRAMEWORK_DEBUG: 0
         DATABASE_NAME: simplex
-        DATABASE_USER: admin
+        DATABASE_USER: root
         DATABASE_PASS:
 
 database:
