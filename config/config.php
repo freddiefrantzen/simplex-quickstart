@@ -19,7 +19,7 @@ return [
         SetJsonResponseHeaders::class,
     ],
 
-    'db.host' => DI\env('DATABASE_HOST', 'localhost'),
+    'db.host' => DI\env('DATABASE_HOST', '127.0.0.1'),
     'db.port' => DI\env('DATABASE_PORT', '3306'),
     'db.name' => DI\env('DATABASE_NAME'),
     'db.user' => DI\env('DATABASE_USER'),

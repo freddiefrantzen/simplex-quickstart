@@ -3,9 +3,9 @@ machine:
         version: 7.1.0
     environment:
         FRAMEWORK_ENV: prod
-        FRAMEWORK_DEBUG: 0
+        FRAMEWORK_DEBUG: false
         DATABASE_NAME: simplex
-        DATABASE_USER: root
+        DATABASE_USER: ubuntu
         DATABASE_PASS:
 
 database:
@@ -14,5 +14,5 @@ database:
 
 test:
     override:
-        - vendor/bin/phpunit -c=simplex-quickstart/vendor/simplex/simplex/phpunit.xml.dist
+        - vendor/bin/phpunit -c=vendor/simplex/simplex/phpunit.xml.dist
         - vendor/bin/phpunit
