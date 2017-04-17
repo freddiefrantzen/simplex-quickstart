@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0064bb604ec2cb158151cd326320566",
+    "content-hash": "681677ed15b28a48a143eb4316a708b8",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1850,12 +1850,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freddiefrantzen/simplex.git",
-                "reference": "38eafb39b0674b6c94922967cacc589968877aa8"
+                "reference": "e494fe86148a5ed7efc89cf163a866fc969cb84f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/38eafb39b0674b6c94922967cacc589968877aa8",
-                "reference": "38eafb39b0674b6c94922967cacc589968877aa8",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/e494fe86148a5ed7efc89cf163a866fc969cb84f",
+                "reference": "e494fe86148a5ed7efc89cf163a866fc969cb84f",
                 "shasum": ""
             },
             "require": {
@@ -1886,13 +1886,21 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Freddie Frantzen",
                     "email": "freddie@freddiefrantzen.com"
                 }
             ],
-            "time": "2017-03-29 20:45:20"
+            "description": "Modular, micro framework for PHP 7",
+            "keywords": [
+                "micro framework",
+                "modular"
+            ],
+            "time": "2017-04-17 10:50:39"
         },
         {
             "name": "symfony/cache",

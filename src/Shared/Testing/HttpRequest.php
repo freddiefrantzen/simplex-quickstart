@@ -72,7 +72,7 @@ class HttpRequest
         $this->request = $this->request
             ->withUri(new Uri($uri))
             ->withBody($stream)
-            ->withMethod('POST');
+            ->withMethod('PUT');
 
         $response = $this->send();
 

@@ -1,11 +1,14 @@
 {
     "name": "simplex/quickstart",
+    "description": "Quickstart for the Simplex framework",
+    "keywords": ["simplex", "quickstart"],
     "authors": [
         {
-            "name": "freddiefrantzen",
+            "name": "Freddie Frantzen",
             "email": "freddie@freddiefrantzen.com"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Simplex\\Quickstart\\": "src"
@@ -13,7 +16,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "simplex/simplex": "dev-master#v0.1.0",
+        "simplex/simplex": "dev-master#v0.1.2",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",

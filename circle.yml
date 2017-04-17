@@ -13,5 +13,7 @@ database:
         - composer init-db
 
 test:
+    pre:
+        - composer validate
     override:
         - vendor/bin/phpunit
