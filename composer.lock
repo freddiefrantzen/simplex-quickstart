@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "681677ed15b28a48a143eb4316a708b8",
+    "content-hash": "c4d8dc7c3a232299228dd4fe8741bd87",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1846,16 +1846,16 @@
         },
         {
             "name": "simplex/simplex",
-            "version": "dev-master",
+            "version": "v0.2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/freddiefrantzen/simplex.git",
-                "reference": "e494fe86148a5ed7efc89cf163a866fc969cb84f"
+                "reference": "2f1073930429b09675f995e61aed13c90271d94b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/e494fe86148a5ed7efc89cf163a866fc969cb84f",
-                "reference": "e494fe86148a5ed7efc89cf163a866fc969cb84f",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/2f1073930429b09675f995e61aed13c90271d94b",
+                "reference": "2f1073930429b09675f995e61aed13c90271d94b",
                 "shasum": ""
             },
             "require": {
@@ -1900,7 +1900,7 @@
                 "micro framework",
                 "modular"
             ],
-            "time": "2017-04-17 10:50:39"
+            "time": "2017-07-29 16:28:32"
         },
         {
             "name": "symfony/cache",
@@ -3120,12 +3120,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },
