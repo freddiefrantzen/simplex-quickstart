@@ -6,7 +6,9 @@ set_time_limit(0);
 $loader = require __DIR__.'/../vendor/autoload.php';
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
-$kernel = new \Simplex\Kernel(__DIR__ . '/../');
+$config = (new \Simplex\ConfigLoader())->loadFromDirectory(__DIR__ . '/../config');
+
+$kernel = new \Simplex\Kernel($config);
 $kernel->boot();
 
 $application = new \Simplex\ConsoleApplication($kernel);

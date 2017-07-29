@@ -1,6 +1,7 @@
 <?php
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Simplex\ConfigLoader;
 use Simplex\HttpApplication;
 use Simplex\Kernel;
 use Zend\Diactoros\ServerRequestFactory;
@@ -14,7 +15,9 @@ $request = ServerRequestFactory::fromGlobals(
     $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
 );
 
-$kernel = new Kernel(__DIR__ . '/../');
+$config = (new ConfigLoader())->loadFromDirectory(__DIR__ . '/../config');
+
+$kernel = new Kernel($config);
 $kernel->boot();
 
 $application = new HttpApplication($kernel);

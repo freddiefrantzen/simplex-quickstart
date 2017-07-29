@@ -7,6 +7,7 @@ use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Simplex\ConfigLoader;
 use Simplex\Kernel;
 
 class FunctionalTest extends TestCase
@@ -53,8 +54,10 @@ class FunctionalTest extends TestCase
 
     public function getKernel(): Kernel
     {
+        $config = (new ConfigLoader())->loadFromDirectory(__DIR__ . '/../../../config');
+
         if (!isset(self::$kernel)) {
-            self::$kernel = new Kernel(__DIR__ . '/../../../');
+            self::$kernel = new Kernel($config);
             self::$kernel->boot();
         }
 
