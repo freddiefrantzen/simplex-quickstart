@@ -2,13 +2,13 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
+use DI\Container;
 use Helmich\JsonAssert\JsonAssertions;
 use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Simplex\ConfigLoader;
-use Simplex\Kernel;
+use Simplex\ContainerBuilder;
 
 class FunctionalTest extends TestCase
 {
@@ -17,13 +17,13 @@ class FunctionalTest extends TestCase
 
     protected $reloadDb = true;
 
-    /** @var Kernel */
-    private static $kernel;
+    /** @var Container */
+    private static $container;
 
     protected function setUp()
     {
         if ($this->reloadDb) {
-            $loader = $this->getKernel()->getContainer()->get(FixtureLoader::class);
+            $loader = $this->getContainer()->get(FixtureLoader::class);
             $loader->load();
         }
 
@@ -39,29 +39,26 @@ class FunctionalTest extends TestCase
 
     public function setInContainer($name, $value): void
     {
-        $this->getKernel()->getContainer()->set($name, $value);
+        $this->getContainer()->set($name, $value);
     }
 
     public function getFromContainer(string $id)
     {
-        return $this->getKernel()->getContainer()->get($id);
+        return $this->getContainer()->get($id);
     }
 
     public function createHttpRequest(): HttpRequest
     {
-        return new HttpRequest($this->getKernel());
+        return new HttpRequest($this->getContainer());
     }
 
-    public function getKernel(): Kernel
+    public function getContainer(): Container
     {
-        $config = (new ConfigLoader())->loadFromDirectory(__DIR__ . '/../../../config');
-
-        if (!isset(self::$kernel)) {
-            self::$kernel = new Kernel($config);
-            self::$kernel->boot();
+        if (!isset(self::$container)) {
+            self::$container = (new ContainerBuilder(new \SplFileInfo(__DIR__ . '/../../../config')))->build();
         }
 
-        return self::$kernel;
+        return self::$container;
     }
 
     public function getBody(ResponseInterface $response): array

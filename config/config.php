@@ -2,7 +2,9 @@
 
 use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\DispatchController;
+use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\SetJsonResponseHeaders;
+use Simplex\HttpMiddleware\RegisterExceptionHandler;
 
 return [
 
@@ -11,9 +13,12 @@ return [
     'env' => DI\env('FRAMEWORK_ENV', 'dev'),
     'debug_mode' => DI\env('FRAMEWORK_DEBUG', false),
 
+    'cache_enabled' => DI\env('CACHE_ENABLED', false),
     'cache_dir' => __DIR__ . '/../cache/',
 
     'middleware' => [
+        RegisterExceptionHandler::class,
+        LoadRoutes::class,
         MatchRoute::class,
         DispatchController::class,
         SetJsonResponseHeaders::class,

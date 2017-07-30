@@ -2,6 +2,7 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
+use DI\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
@@ -14,17 +15,15 @@ use Zend\Diactoros\Uri;
 class HttpRequest
 {
     /** @var Kernel */
-    private $kernel;
+    private $container;
 
     /** @var ServerRequestInterface */
     private $request;
 
-    public function __construct(Kernel $kernel)
+    public function __construct(Container $container)
     {
-        $this->kernel = $kernel;
+        $this->container = $container;
         $this->request = $this->createRequest();
-
-        return $this;
     }
 
     private function createRequest(): ServerRequestInterface
@@ -46,9 +45,7 @@ class HttpRequest
             ->withQueryParams($queryParams)
             ->withMethod('GET');
 
-        $response = $this->send();
-
-        return $response;
+        return $this->send();
     }
 
     public function sendPost(string $uri,  array $body): ResponseInterface
@@ -60,9 +57,7 @@ class HttpRequest
             ->withBody($stream)
             ->withMethod('POST');
 
-        $response = $this->send();
-
-        return $response;
+        return $this->send();
     }
 
     public function sendPut(string $uri,  array $body): ResponseInterface
@@ -74,9 +69,7 @@ class HttpRequest
             ->withBody($stream)
             ->withMethod('PUT');
 
-        $response = $this->send();
-
-        return $response;
+        return $this->send();
     }
 
     public function sendDelete(string $uri): ResponseInterface
@@ -85,18 +78,14 @@ class HttpRequest
             ->withUri(new Uri($uri))
             ->withMethod('DELETE');
 
-        $response = $this->send();
-
-        return $response;
+        return $this->send();
     }
 
     private function send(): ResponseInterface
     {
-        $application = new HttpApplication($this->kernel);
+        $application = new HttpApplication($this->container);
 
-        $response = $application->handleRequest($this->request, new Response());
-
-        return $response;
+        return $application->handleRequest($this->request, new Response());
     }
 
     /**

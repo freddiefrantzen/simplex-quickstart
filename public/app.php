@@ -1,9 +1,8 @@
 <?php
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Simplex\ConfigLoader;
+use Simplex\ContainerBuilder;
 use Simplex\HttpApplication;
-use Simplex\Kernel;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\Response;
@@ -15,12 +14,9 @@ $request = ServerRequestFactory::fromGlobals(
     $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
 );
 
-$config = (new ConfigLoader())->loadFromDirectory(__DIR__ . '/../config');
+$container = (new ContainerBuilder(new \SplFileInfo(__DIR__ . '/../config')))->build();
 
-$kernel = new Kernel($config);
-$kernel->boot();
-
-$application = new HttpApplication($kernel);
+$application = new HttpApplication($container);
 $response = $application->handleRequest($request, new Response());
 
 $emitter = new SapiEmitter();

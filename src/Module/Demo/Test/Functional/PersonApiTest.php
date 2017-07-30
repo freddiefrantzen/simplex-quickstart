@@ -10,7 +10,7 @@ class PersonApiTest extends FunctionalTest
 {
     public function test_it_can_be_queried_for_a_list_of_people()
     {
-        $request = new HttpRequest($this->getKernel());
+        $request = new HttpRequest($this->getContainer());
 
         $response = $request->sendGet('/');
 
@@ -25,7 +25,7 @@ class PersonApiTest extends FunctionalTest
 
     public function test_it_can_be_queried_for_a_specific_person()
     {
-        $request = new HttpRequest($this->getKernel());
+        $request = new HttpRequest($this->getContainer());
 
         $response = $request
             ->sendGet('/person/' . PersonLoader::STATIC_ID);
@@ -48,7 +48,7 @@ class PersonApiTest extends FunctionalTest
 
     public function test_it_can_create_a_new_person()
     {
-        $request = new HttpRequest($this->getKernel());
+        $request = new HttpRequest($this->getContainer());
 
         $response = $request
             ->sendPost('/person', [
