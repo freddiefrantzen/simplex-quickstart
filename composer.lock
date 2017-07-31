@@ -1981,12 +1981,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freddiefrantzen/simplex.git",
-                "reference": "3428e0f678eb62b85d988b5d1525f7f0b67d8860"
+                "reference": "88c5e413cbe3340f7e15f62fb0b0d32ae4283f57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/3428e0f678eb62b85d988b5d1525f7f0b67d8860",
-                "reference": "3428e0f678eb62b85d988b5d1525f7f0b67d8860",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/88c5e413cbe3340f7e15f62fb0b0d32ae4283f57",
+                "reference": "88c5e413cbe3340f7e15f62fb0b0d32ae4283f57",
                 "shasum": ""
             },
             "require": {
@@ -2031,7 +2031,7 @@
                 "micro framework",
                 "modular"
             ],
-            "time": "2017-07-30 17:42:46"
+            "time": "2017-07-31 19:56:47"
         },
         {
             "name": "symfony/cache",
