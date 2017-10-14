@@ -4,6 +4,7 @@ use Doctrine\ORM\EntityManager;
 use JMS\Serializer\SerializerInterface;
 use League\Tactician\CommandBus;
 use Psr\Container\ContainerInterface;
+use Simplex\Environment;
 use Simplex\Quickstart\Shared\Controller\AppController;
 use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
 use Simplex\Quickstart\Shared\Factory\CommandBusFactory;
@@ -38,13 +39,14 @@ return [
         ->parameter('name', DI\get('db.name'))
         ->parameter('user', DI\get('db.user'))
         ->parameter('pass', DI\get('db.pass'))
-        ->parameter('cacheDir', DI\get('cache_dir'))
-        ->parameter('debugMode', DI\get('debug_mode')),
+        ->parameter('cacheDir', CACHE_DIRECTORY)
+        ->parameter('enableCache', DI\get(Environment::ENABLE_CACHE_CONTAINER_KEY)),
 
     SerializerInterface::class => DI\factory([SerializerFactory::class, 'create'])
         ->parameter('urlGenerator', DI\get(UrlGenerator::class))
-        ->parameter('cacheDir', DI\get('cache_dir'))
-        ->parameter('debugMode', DI\get('debug_mode')),
+        ->parameter('enableCache', DI\get(Environment::ENABLE_CACHE_CONTAINER_KEY))
+        ->parameter('cacheDir', CACHE_DIRECTORY)
+        ->parameter('debugMode', DI\get(Environment::DEBUG_MODE_CONTAINER_KEY)),
 
     CommandBus::class => DI\factory([CommandBusFactory::class, 'create'])
         ->parameter('locator', DI\get(HandlerLocator::class)),

@@ -1,5 +1,6 @@
 <?php
 
+use Simplex\Environment;
 use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
@@ -8,10 +9,7 @@ use Simplex\HttpMiddleware\RegisterExceptionHandler;
 
 return [
 
-    'editor' => DI\env('EDITOR', 'phpstorm'),
-
-    'cache_enabled' => DI\env('CACHE_ENABLED', false),
-    'cache_dir' => __DIR__ . '/../cache/',
+    'editor' => DI\env(Environment::EDITOR_ENV_VAR, 'phpstorm'),
 
     'middleware' => [
         RegisterExceptionHandler::class,

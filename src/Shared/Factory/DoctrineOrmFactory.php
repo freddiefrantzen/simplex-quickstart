@@ -21,7 +21,7 @@ class DoctrineOrmFactory
         string $user,
         string $pass,
         string $cacheDir,
-        bool $debugMode) : EntityManager
+        bool $enableCache) : EntityManager
     {
         $connectionOptions = array(
             'driver' => 'pdo_mysql',
@@ -32,21 +32,19 @@ class DoctrineOrmFactory
             'password' => $pass,
         );
 
-        $config = $this->createConfig($cacheDir, $debugMode);
+        $config = $this->createConfig($cacheDir, $enableCache);
 
         $this->addCustomTypes();
 
-        $entityManager = EntityManager::create($connectionOptions, $config);
-
-        return $entityManager;
+        return EntityManager::create($connectionOptions, $config);
     }
 
-    private function createConfig(string $cacheDir, bool $debugMode): Configuration
+    private function createConfig(string $cacheDir, bool $enableCache): Configuration
     {
-        if ($debugMode) {
+        if (!$enableCache) {
             $cache = new ArrayCache();
         } else {
-            $cache = new FilesystemCache($cacheDir . 'doctrine/');
+            $cache = new FilesystemCache($cacheDir . '/doctrine/');
         }
 
         $config = new Configuration;
@@ -59,7 +57,7 @@ class DoctrineOrmFactory
         $config->setProxyDir($cacheDir . 'doctrine/proxy/');
         $config->setProxyNamespace('DoctrineProxies');
 
-        if ($debugMode) {
+        if ($enableCache) {
             $config->setAutoGenerateProxyClasses(true);
         } else {
             $config->setAutoGenerateProxyClasses(false);

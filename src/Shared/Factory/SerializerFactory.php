@@ -9,16 +9,22 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class SerializerFactory
 {
-    public function create(UrlGenerator $urlGenerator, string $cacheDir, bool $debugMode): Hateoas
-    {
-        $hateoas = HateoasBuilder::create()
-            ->setUrlGenerator(null, new SymfonyUrlGenerator($urlGenerator))
-            ->setCacheDir($cacheDir . 'serializer/')
-            ->setDebug($debugMode)
-            ->build()
-        ;
+    const SERIALIZER_CACHE_DIR = DIRECTORY_SEPARATOR . 'serializer';
 
-        return $hateoas;
+    public function create(UrlGenerator $urlGenerator, bool $enableCache, string $cacheDir, bool $debugMode): Hateoas
+    {
+        if ($enableCache) {
+            return HateoasBuilder::create()
+                ->setUrlGenerator(null, new SymfonyUrlGenerator($urlGenerator))
+                ->setCacheDir($cacheDir . self::SERIALIZER_CACHE_DIR)
+                ->setDebug($debugMode)
+                ->build();
+        }
+
+        return HateoasBuilder::create()
+            ->setUrlGenerator(null, new SymfonyUrlGenerator($urlGenerator))
+            ->setDebug($debugMode)
+            ->build();
     }
 }
 
