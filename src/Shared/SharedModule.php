@@ -6,7 +6,7 @@ use Simplex\Module;
 
 class SharedModule implements Module
 {
-    public function getServiceConfigDirectory(): ?string
+    public function getServiceDefinitionsDirectory(): ?string
     {
         return __DIR__ . '/config';
     }

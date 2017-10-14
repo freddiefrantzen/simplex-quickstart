@@ -41,8 +41,6 @@ return [
         ->parameter('cacheDir', DI\get('cache_dir'))
         ->parameter('debugMode', DI\get('debug_mode')),
 
-
-
     SerializerInterface::class => DI\factory([SerializerFactory::class, 'create'])
         ->parameter('urlGenerator', DI\get(UrlGenerator::class))
         ->parameter('cacheDir', DI\get('cache_dir'))

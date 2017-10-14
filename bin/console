@@ -1,12 +1,17 @@
 #!/usr/bin/env php
 <?php
 
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Simplex\Bootstrap;
+use Simplex\ConsoleApplication;
+
 set_time_limit(0);
 
 $loader = require __DIR__.'/../vendor/autoload.php';
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
-$container = (new \Simplex\ContainerBuilder(new \SplFileInfo(__DIR__ . '/../config')))->build();
+AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
-$application = new \Simplex\ConsoleApplication($container);
+Bootstrap::init( __DIR__ . '/../config');
+
+$application = new ConsoleApplication(Bootstrap::getContainer());
 $application->run();

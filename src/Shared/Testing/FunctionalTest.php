@@ -8,7 +8,7 @@ use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Simplex\ContainerBuilder;
+use Simplex\Bootstrap;
 
 class FunctionalTest extends TestCase
 {
@@ -55,7 +55,8 @@ class FunctionalTest extends TestCase
     public function getContainer(): Container
     {
         if (!isset(self::$container)) {
-            self::$container = (new ContainerBuilder(new \SplFileInfo(__DIR__ . '/../../../config')))->build();
+            Bootstrap::init(__DIR__ . '/../../../config');
+            self::$container = Bootstrap::getContainer();
         }
 
         return self::$container;

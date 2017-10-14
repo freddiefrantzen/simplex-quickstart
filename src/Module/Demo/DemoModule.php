@@ -14,7 +14,7 @@ use Simplex\Module;
 
 class DemoModule implements Module
 {
-    public function getServiceConfigDirectory(): string
+    public function getServiceDefinitionsDirectory(): string
     {
         return __DIR__ . '/config';
     }
