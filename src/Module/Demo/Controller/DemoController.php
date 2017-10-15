@@ -34,7 +34,7 @@ class DemoController extends AppController
      */
     public function get(Request $request, Response $response, $id): Response
     {
-        $person = $this->personRepository->find($id);
+        $person = $this->personRepository->ofId($id);
 
         return $this->jsonResponse($response, $person);
     }
