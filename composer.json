@@ -32,9 +32,9 @@
         "vlucas/phpdotenv": "^2.4"
     },
     "scripts": {
-        "test": "phpunit --colors=always",
+        "test": "vendor/bin/phpunit --colors=always",
         "run": "php -S 0.0.0.0:8080 -t public public/app.php",
-        "cc": "rm -R cache/*",
+        "clear-cache": "rm -R cache/*",
         "init-db": [
             "bin/console orm:database:create --if-not-exists",
             "bin/console orm:schema-tool:create",
