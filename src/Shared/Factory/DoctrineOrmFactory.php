@@ -14,6 +14,18 @@ use Symfony\Component\Finder\Finder;
 
 class DoctrineOrmFactory
 {
+    const DOCTRINE_CACHE_DIRECTORY = 'doctrine';
+
+    const PROXY_DIRECTORY = self::DOCTRINE_CACHE_DIRECTORY . DIRECTORY_SEPARATOR . 'proxy';
+
+    const PROXY_NAMESPACE = 'DoctrineProxies';
+
+    const MODULES_DIRECTORY_PATH = __DIR__ . '/../../Module';
+
+    const ENTITY_DIRECTORY_NAME = 'Model';
+
+    const UUID_TYPE_NAME = 'uuid';
+
     public function create(
         string $host,
         string $port,
@@ -41,10 +53,12 @@ class DoctrineOrmFactory
 
     private function createConfig(string $cacheDir, bool $enableCache): Configuration
     {
+        $cacheDir = rtrim($cacheDir, DIRECTORY_SEPARATOR);
+
         if (!$enableCache) {
             $cache = new ArrayCache();
         } else {
-            $cache = new FilesystemCache($cacheDir . '/doctrine/');
+            $cache = new FilesystemCache($cacheDir . DIRECTORY_SEPARATOR . self::DOCTRINE_CACHE_DIRECTORY);
         }
 
         $config = new Configuration;
@@ -54,8 +68,8 @@ class DoctrineOrmFactory
         $config->setMetadataDriverImpl($driverImpl);
         $config->setMetadataCacheImpl($cache);
         $config->setQueryCacheImpl($cache);
-        $config->setProxyDir($cacheDir . 'doctrine/proxy/');
-        $config->setProxyNamespace('DoctrineProxies');
+        $config->setProxyDir($cacheDir . DIRECTORY_SEPARATOR . self::PROXY_DIRECTORY);
+        $config->setProxyNamespace(self::PROXY_NAMESPACE);
 
         if ($enableCache) {
             $config->setAutoGenerateProxyClasses(true);
@@ -69,11 +83,11 @@ class DoctrineOrmFactory
     private function getEntityDirPaths(): array
     {
         $finder = new Finder();
-        $finder->directories()->depth(0)->in(__DIR__ . '/../../Module');
+        $finder->directories()->depth(0)->in(self::MODULES_DIRECTORY_PATH);
 
         $paths = [];
         foreach ($finder as $dir) {
-            $modelDir = $dir->getPathname() . '/Model';
+            $modelDir = $dir->getPathname() . DIRECTORY_SEPARATOR . self::ENTITY_DIRECTORY_NAME;
             if (is_readable($modelDir)) {
                 $paths[] = $modelDir;
             }
@@ -84,6 +98,6 @@ class DoctrineOrmFactory
 
     private function addCustomTypes()
     {
-        Type::addType('uuid', UuidType::class);
+        Type::addType(self::UUID_TYPE_NAME, UuidType::class);
     }
 }

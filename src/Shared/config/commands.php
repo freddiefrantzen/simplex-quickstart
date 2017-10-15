@@ -3,6 +3,7 @@
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Psr\Container\ContainerInterface;
+use Simplex\ContainerKeys;
 use Simplex\Quickstart\Shared\Console\CreateDatabaseCommand;
 use Simplex\Quickstart\Shared\Console\DropDatabaseCommand;
 use Simplex\Quickstart\Shared\Console\LoadFixturesCommand;
@@ -54,7 +55,7 @@ return [
     \Doctrine\ORM\Tools\Console\Command\InfoCommand::class => \DI\create(\Doctrine\ORM\Tools\Console\Command\InfoCommand::class),
     \Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand::class => \DI\create(\Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand::class),
 
-    'console_commands' => DI\add([
+    ContainerKeys::CONSOLE_COMMANDS => DI\add([
         DI\get(CreateDatabaseCommand::class),
         DI\get(DropDatabaseCommand::class),
         DI\get(LoadFixturesCommand::class),
@@ -80,7 +81,7 @@ return [
         DI\get(\Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand::class),
     ]),
 
-    'console_helper_set' => function (ContainerInterface $c) {
+    ContainerKeys::CONSOLE_HELPER_SET => function (ContainerInterface $c) {
         return ConsoleRunner::createHelperSet($c->get(EntityManager::class));
     },
 

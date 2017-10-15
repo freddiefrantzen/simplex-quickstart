@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\EntityManager;
 use Psr\Container\ContainerInterface;
+use Simplex\ContainerKeys;
 use Simplex\Quickstart\Module\Demo\CommandHandler\RegisterHandler;
 use Simplex\Quickstart\Module\Demo\Console\DemoCommand;
 use Simplex\Quickstart\Module\Demo\Model\Person;
@@ -13,7 +14,7 @@ return [
         return new DemoCommand();
     },
 
-    'console_commands' => DI\add([
+    ContainerKeys::CONSOLE_COMMANDS => DI\add([
         DI\get(FooCommand::class),
     ]),
 

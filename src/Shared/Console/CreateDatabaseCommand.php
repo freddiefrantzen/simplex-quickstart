@@ -11,6 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDatabaseCommand extends Command
 {
+    const COMMAND_NAME = 'orm:database:create';
+
+    const OPTION_IF_NOT_EXISTS = 'if-not-exists';
+
     /** @var Connection */
     private $connection;
 
@@ -42,19 +46,27 @@ class CreateDatabaseCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('orm:database:create')
+            ->setName(self::COMMAND_NAME)
             ->setDescription('Creates the configured database')
-            ->addOption('if-not-exists', null, InputOption::VALUE_NONE, 'Don\'t trigger an error, when the database already exists')
+            ->addOption(
+                self::OPTION_IF_NOT_EXISTS,
+                null,
+                InputOption::VALUE_NONE,
+                'Don\'t trigger an error, when the database already exists'
+            )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('if-not-exists') && in_array($this->name, $this->connection->getSchemaManager()->listDatabases())) {
+        if ($input->getOption(self::OPTION_IF_NOT_EXISTS)
+            && in_array($this->name, $this->connection->getSchemaManager()->listDatabases())
+        ) {
             return;
         }
 
         $this->connection->getSchemaManager()->createDatabase($this->name);
+
         $output->writeln(sprintf('<info>Created database <comment>%s</comment></info>', $this->name));
     }
 }

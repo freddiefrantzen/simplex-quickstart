@@ -6,7 +6,6 @@ use DI\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
-use Simplex\Kernel;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Diactoros\Stream;
@@ -14,7 +13,12 @@ use Zend\Diactoros\Uri;
 
 class HttpRequest
 {
-    /** @var Kernel */
+    const HTTP_GET = 'GET';
+    const HTTP_POST = 'POST';
+    const HTTP_PUT = 'PUT';
+    const HTTP_DELETE = 'DELETE';
+
+    /** @var Container */
     private $container;
 
     /** @var ServerRequestInterface */
@@ -43,7 +47,7 @@ class HttpRequest
         $this->request = $this->request
             ->withUri(new Uri($uri))
             ->withQueryParams($queryParams)
-            ->withMethod('GET');
+            ->withMethod(self::HTTP_GET);
 
         return $this->send();
     }
@@ -55,7 +59,7 @@ class HttpRequest
         $this->request = $this->request
             ->withUri(new Uri($uri))
             ->withBody($stream)
-            ->withMethod('POST');
+            ->withMethod(self::HTTP_POST);
 
         return $this->send();
     }
@@ -67,7 +71,7 @@ class HttpRequest
         $this->request = $this->request
             ->withUri(new Uri($uri))
             ->withBody($stream)
-            ->withMethod('PUT');
+            ->withMethod(self::HTTP_PUT);
 
         return $this->send();
     }
@@ -76,7 +80,7 @@ class HttpRequest
     {
         $this->request = $this->request
             ->withUri(new Uri($uri))
-            ->withMethod('DELETE');
+            ->withMethod(self::HTTP_DELETE);
 
         return $this->send();
     }

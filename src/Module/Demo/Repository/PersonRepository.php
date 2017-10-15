@@ -8,6 +8,8 @@ use Simplex\Quickstart\Module\Demo\Model\Person;
 
 class PersonRepository extends EntityRepository
 {
+    const EMAIL_FIELD = 'email';
+
     public function ofId(string $id): Person
     {
         $person = $this->find($id);
@@ -21,7 +23,7 @@ class PersonRepository extends EntityRepository
 
     public function ofUsername(string $username): Person
     {
-        $person = $this->findOneBy(['email' => $username]);
+        $person = $this->findOneBy([self::EMAIL_FIELD => $username]);
 
         if (!$person instanceof Person) {
             throw new ResourceNotFoundException();

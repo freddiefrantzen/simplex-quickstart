@@ -9,6 +9,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadFixturesCommand extends Command
 {
+    const COMMAND_NAME = 'app:load-fixtures';
+
     /** @var FixtureLoader */
     private $loader;
 
@@ -21,7 +23,7 @@ class LoadFixturesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('app:load-fixtures')
+            ->setName(self::COMMAND_NAME)
             ->setDescription('Loads the database fixtures')
         ;
     }

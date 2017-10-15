@@ -11,6 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DropDatabaseCommand extends Command
 {
+    const COMMAND_NAME = 'orm:database:drop';
+
+    const OPTION_IF_EXISTS = 'if-exists';
+
     /** @var Connection */
     private $connection;
 
@@ -42,19 +46,27 @@ class DropDatabaseCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('orm:database:drop')
+            ->setName(self::COMMAND_NAME)
             ->setDescription('Drop the configured database')
-            ->addOption('if-exists', null, InputOption::VALUE_NONE, 'Don\'t trigger an error, when the database does not exist')
+            ->addOption(
+                self::OPTION_IF_EXISTS,
+                null,
+                InputOption::VALUE_NONE,
+                'Don\'t trigger an error, when the database does not exist'
+            )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getOption('if-exists') && !in_array($this->name, $this->connection->getSchemaManager()->listDatabases())) {
+        if ($input->getOption(self::OPTION_IF_EXISTS)
+            && !in_array($this->name, $this->connection->getSchemaManager()->listDatabases())
+        ) {
             return;
         }
 
         $this->connection->getSchemaManager()->dropDatabase($this->name);
+
         $output->writeln(sprintf('<info>Dropped database <comment>%s</comment></info>', $this->name));
     }
 }

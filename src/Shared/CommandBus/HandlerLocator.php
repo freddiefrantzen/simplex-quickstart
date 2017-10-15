@@ -7,6 +7,9 @@ use Psr\Container\ContainerInterface;
 
 class HandlerLocator implements LocatorInterface
 {
+    const COMMAND_HANDLER_NAMESPACE_PART = 'CommandHandler';
+    const COMMAND_HANDLER_CLASS_SUFFIX = 'Handler';
+
     /** @var ContainerInterface */
     private $container;
 
@@ -19,16 +22,14 @@ class HandlerLocator implements LocatorInterface
     {
         $namespaceParts = explode('\\', $commandName);
 
-        $className = array_pop($namespaceParts);
+        $commandClassName = array_pop($namespaceParts);
         array_pop($namespaceParts); // remove 'Command' namespace part
 
-        $namespaceParts[] = 'CommandHandler';
-        $namespaceParts[] = $className . 'Handler';
+        $namespaceParts[] = self::COMMAND_HANDLER_NAMESPACE_PART;
+        $namespaceParts[] = $commandClassName . self::COMMAND_HANDLER_CLASS_SUFFIX;
 
         $handlerName = implode('\\', $namespaceParts);
 
-        $handler = $this->container->get($handlerName);
-
-        return $handler;
+        return $this->container->get($handlerName);
     }
 }

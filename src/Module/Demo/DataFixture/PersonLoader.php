@@ -22,7 +22,5 @@ class PersonLoader extends AbstractFixture
 
         $manager->persist($person);
         $manager->flush();
-
-        $this->addReference('basic-user', $person);
     }
 }

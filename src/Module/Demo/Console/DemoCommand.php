@@ -8,10 +8,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DemoCommand extends Command
 {
+    const COMMAND_NAME = 'app:demo';
+
     protected function configure()
     {
         $this
-            ->setName('app:demo')
+            ->setName(self::COMMAND_NAME)
             ->setDescription('Example command')
         ;
     }
