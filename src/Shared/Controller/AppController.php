@@ -2,6 +2,7 @@
 
 namespace Simplex\Quickstart\Shared\Controller;
 
+use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use JMS\Serializer\Exception\Exception as SerializerException;
 use League\Tactician\CommandBus;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -48,7 +49,7 @@ abstract class AppController extends BaseController
         try {
             $command = $this->serializer->deserialize((string)$request->getBody(), $commandClass, parent::JSON_FORMAT);
         } catch (SerializerException $exception) {
-            throw new BadRequestException("Invalid request body");
+            throw new BadRequestException("Invalid request body", Httpstatuscodes::HTTP_BAD_REQUEST, $exception);
         }
 
         return $command;
@@ -60,7 +61,7 @@ abstract class AppController extends BaseController
 
         if ($violations->count() > 0) {
 
-            $exception = new BadRequestException("Validation failure");
+            $exception = new BadRequestException("Validation failure", Httpstatuscodes::HTTP_BAD_REQUEST);
             $exception->setViolations($violations);
 
             throw $exception;
