@@ -85,7 +85,7 @@ trait HttpRequestCapabilities
         $request = $this->createRequest('PUT', $uri)
             ->withBody($stream);
 
-        $this->addHeaders($headers, $request);
+        $request = $this->addHeaders($headers, $request);
 
         return $this->send($request);
     }
@@ -94,7 +94,7 @@ trait HttpRequestCapabilities
     {
         $request = $this->createRequest('DELETE', $uri);
 
-        $this->addHeaders($headers, $request);
+        $request = $this->addHeaders($headers, $request);
 
         return $this->send($request);
     }
