@@ -6,7 +6,6 @@ $loader = require __DIR__.'/vendor/autoload.php';
 
 // So we can run the core tests in a quickstart test suite
 $loader->add("org\\bovigo\\vfs\\", ['vendor/simplex/simplex/vendor/mikey179/vfsStream/src/main/php']);
-$loader->addPsr4("Simplex\\Tests\\", ['vendor/simplex/simplex/tests']);
 
 // Parameters set in .ev.testing will not be overloaded
 if (is_readable(__DIR__  . '/.env.testing')) {

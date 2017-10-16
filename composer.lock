@@ -1942,12 +1942,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/freddiefrantzen/simplex.git",
-                "reference": "88c5e413cbe3340f7e15f62fb0b0d32ae4283f57"
+                "reference": "64caf9dd172a4446f7546d548700e5f3c02438e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/88c5e413cbe3340f7e15f62fb0b0d32ae4283f57",
-                "reference": "88c5e413cbe3340f7e15f62fb0b0d32ae4283f57",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/64caf9dd172a4446f7546d548700e5f3c02438e8",
+                "reference": "64caf9dd172a4446f7546d548700e5f3c02438e8",
                 "shasum": ""
             },
             "require": {
@@ -1969,12 +1969,14 @@
                 "zendframework/zend-diactoros": "^1.3"
             },
             "require-dev": {
+                "mikey179/vfsstream": "^1.6",
                 "phpunit/phpunit": "^6.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Simplex\\": "src"
+                    "Simplex\\": "src",
+                    "Simplex\\Tests\\": "tests"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1992,7 +1994,7 @@
                 "micro framework",
                 "modular"
             ],
-            "time": "2017-07-31 19:56:47"
+            "time": "2017-10-16 14:03:43"
         },
         {
             "name": "symfony/cache",
