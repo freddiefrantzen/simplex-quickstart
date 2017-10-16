@@ -28,7 +28,7 @@ class PersonApiTest extends FunctionalTest
         $request = new HttpRequest($this->getContainer());
 
         $response = $request
-            ->sendGet('/person/' . PersonLoader::STATIC_ID);
+            ->sendGet('/person/' . PersonLoader::PERSON_1_ID);
 
         self::assertMessageBodyMatchesJson($response, [
             '$.name' => 'Joe Smith',

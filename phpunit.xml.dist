@@ -12,6 +12,7 @@
         </testsuite>
 
         <testsuite name="functional">
+            <directory>src/Shared/Test/Functional</directory>
             <directory>src/Module/Demo/Test/Functional</directory>
         </testsuite>
 
@@ -20,5 +21,10 @@
         </testsuite>
 
     </testsuites>
+
+    <php>
+        <const name="PHP_WEBSERVER_HOST" value="localhost" />
+        <const name="PHP_WEBSERVER_PORT" value="8080" />
+    </php>
 
 </phpunit>

@@ -13,5 +13,3 @@ if (is_readable(__DIR__  . '/.env.testing')) {
     $dotenv = new \Dotenv\Dotenv(__DIR__, '.env.testing');
     $dotenv->load();
 }
-
-
