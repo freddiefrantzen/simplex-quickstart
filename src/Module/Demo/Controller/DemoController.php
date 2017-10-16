@@ -44,12 +44,12 @@ class DemoController extends AppController
      */
     public function post(Request $request, Response $response): Response
     {
-        $command = $this->map($request, new Register());
+        $command = $this->map($request, Register::class);
 
         $this->handleCommand($command);
 
         $person = $this->personRepository->ofUsername($command->email);
 
-        return $this->createdResponse($response, $person->getId()->toString());
+        return $this->createResponse($response, $person->getId()->toString());
     }
 }

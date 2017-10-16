@@ -2,14 +2,25 @@
 
 namespace Simplex\Quickstart\Module\Demo\Command;
 
+use JMS\Serializer\Annotation as Serializer;
+
 class Register
 {
-    /** @var string */
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
     public $name;
 
-    /** @var string */
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
     public $email;
 
-    /** @var string */
+    /**
+     * @var string
+     * @Serializer\Type("string")
+     */
     public $password;
 }

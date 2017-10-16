@@ -16,15 +16,9 @@ abstract class AppController extends Controller
         $this->commandBus = $commandBus;
     }
 
-    public function map(Request $request, $command)
+    public function map(Request $request, string $commandClass)
     {
-        $mapper = new \JsonMapper();
-
-        $stdObject = json_decode((string) $request->getBody());
-
-        $command = $mapper->map($stdObject, $command);
-
-        return $command;
+        return $this->serializer->deserialize((string) $request->getBody(), $commandClass, parent::JSON_FORMAT);
     }
 
     public function handleCommand($command): void

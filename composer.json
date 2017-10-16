@@ -21,7 +21,6 @@
         "doctrine/data-fixtures": "^1.2",
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",
-        "netresearch/jsonmapper": "^1.1",
         "ramsey/uuid-doctrine": "^1.2",
         "symfony/process": "^3.3"
     },
@@ -35,7 +34,7 @@
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always",
         "run": "php -S 0.0.0.0:8080 -t public public/app.php",
-        "clear-cache": "rm -R cache/*",
+        "cc": "rm -R cache/*",
         "init-db": [
             "bin/console orm:database:create --if-not-exists",
             "bin/console orm:schema-tool:create",
