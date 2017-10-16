@@ -2,6 +2,7 @@
 
 namespace Simplex\Quickstart\Module\Demo\Test\Functional;
 
+use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use Simplex\Quickstart\Module\Demo\DataFixture\PersonLoader;
 use Simplex\Quickstart\Shared\Testing\FunctionalTest;
 
@@ -56,7 +57,7 @@ class PersonApiTest extends FunctionalTest
             ]
         );
 
-        self::assertResponseHasStatus($response, 201);
+        self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_CREATED);
         self::assertMessageHasHeader($response, 'Location');
     }
 }
