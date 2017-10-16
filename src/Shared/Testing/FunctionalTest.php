@@ -7,11 +7,11 @@ use Helmich\JsonAssert\JsonAssertions;
 use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 use Simplex\Bootstrap;
 
 class FunctionalTest extends TestCase
 {
+    use HttpRequestCapabilities;
     use JsonAssertions;
     use Psr7Assertions;
 
@@ -39,19 +39,9 @@ class FunctionalTest extends TestCase
         parent::tearDown();
     }
 
-    public function setInContainer($name, $value): void
-    {
-        $this->getContainer()->set($name, $value);
-    }
-
     public function getFromContainer(string $id)
     {
         return $this->getContainer()->get($id);
-    }
-
-    public function createHttpRequest(): HttpRequest
-    {
-        return new HttpRequest($this->getContainer());
     }
 
     public function getContainer(): Container
@@ -64,13 +54,8 @@ class FunctionalTest extends TestCase
         return self::$container;
     }
 
-    public function getBody(ResponseInterface $response): array
+    public function setInContainer($name, $value): void
     {
-        return json_decode((string) $response->getBody(), true);
-    }
-
-    public function getRawBody(ResponseInterface $response): string
-    {
-        return (string) $response->getBody();
+        $this->getContainer()->set($name, $value);
     }
 }
