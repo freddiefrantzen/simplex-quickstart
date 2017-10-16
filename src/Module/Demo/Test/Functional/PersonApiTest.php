@@ -60,4 +60,66 @@ class PersonApiTest extends FunctionalTest
         self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_CREATED);
         self::assertMessageHasHeader($response, 'Location');
     }
+
+    public function test_bad_request_response_returned_if_missing_required_param_when_creating_new_person()
+    {
+        $this->reloadDb = false;
+
+        $response = $this->sendPost('/person',
+            [
+                'name' => 'Will',
+                'email' => 'will@example.com',
+            ]
+        );
+
+        self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
+        self::assertMessageBodyMatchesJson($response,
+            [
+                '$.[0].property' => 'password',
+                '$.[0].message' => 'This value should not be blank.'
+            ]
+        );
+    }
+
+    public function test_bad_request_response_returned_if_required_param_name_spelt_incorrectly()
+    {
+        $this->reloadDb = false;
+
+        $response = $this->sendPost('/person',
+            [
+                'name' => 'Will',
+                'email' => 'will@example.com',
+                'pass' => 'foobar'
+            ]
+        );
+
+        self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
+        self::assertMessageBodyMatchesJson($response,
+            [
+                '$.[0].property' => 'password',
+                '$.[0].message' => 'This value should not be blank.'
+            ]
+        );
+    }
+
+    public function test_bad_request_response_returned_if_required_param_blank()
+    {
+        $this->reloadDb = false;
+
+        $response = $this->sendPost('/person',
+            [
+                'name' => '',
+                'email' => 'will@example.com',
+                'password' => 'foobar'
+            ]
+        );
+
+        self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
+        self::assertMessageBodyMatchesJson($response,
+            [
+                '$.[0].property' => 'name',
+                '$.[0].message' => 'This value should not be blank.'
+            ]
+        );
+    }
 }

@@ -22,14 +22,16 @@
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",
         "ramsey/uuid-doctrine": "^1.2",
-        "symfony/process": "^3.3"
+        "symfony/process": "^3.3",
+        "symfony/validator": "^3.3"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.4",
         "helmich/phpunit-psr7-assert": "^2.0",
         "mockery/mockery": "^0.9.9",
         "phpunit/phpunit": "^6.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "mikey179/vfsStream": "^1.6"
     },
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always",

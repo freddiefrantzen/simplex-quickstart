@@ -5,6 +5,7 @@ use Simplex\Environment;
 use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
+use Simplex\Quickstart\Shared\HttpMiddleware\HandleBadRequests;
 use Simplex\HttpMiddleware\SetJsonResponseHeaders;
 use Simplex\HttpMiddleware\RegisterExceptionHandler;
 
@@ -16,6 +17,7 @@ return [
         RegisterExceptionHandler::class,
         LoadRoutes::class,
         MatchRoute::class,
+        HandleBadRequests::class,
         DispatchController::class,
         SetJsonResponseHeaders::class,
     ],

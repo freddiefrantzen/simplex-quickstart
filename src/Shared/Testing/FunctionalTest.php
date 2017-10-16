@@ -36,6 +36,8 @@ class FunctionalTest extends TestCase
     {
         m::close();
 
+        $this->reloadDb = true;
+
         parent::tearDown();
     }
 

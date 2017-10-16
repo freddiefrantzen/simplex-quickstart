@@ -11,7 +11,10 @@ use Simplex\Quickstart\Shared\Factory\CommandBusFactory;
 use Simplex\Quickstart\Shared\Factory\DoctrineOrmFactory;
 use Simplex\Quickstart\Shared\Factory\SerializerFactory;
 use Simplex\Quickstart\Shared\Testing\FixtureLoader;
+use Simplex\Quickstart\Shared\Factory\ValidatorFactory;
+use Simplex\Quickstart\Shared\HttpMiddleware\HandleBadRequests;
 use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 return [
 
@@ -21,6 +24,7 @@ return [
                 'urlGenerator' => DI\get(UrlGenerator::class),
                 'serializer' => DI\get(SerializerInterface::class),
                 'commandBus' => DI\get(CommandBus::class),
+                'validator' => DI\get(ValidatorInterface::class),
             ]
         ]
     ),
@@ -48,7 +52,17 @@ return [
         ->parameter('cacheDir', CACHE_DIRECTORY)
         ->parameter('debugMode', DI\get(ContainerKeys::DEBUG_MODE)),
 
+    ValidatorInterface::class => DI\factory([ValidatorFactory::class, 'create'])
+        ->parameter('enableCache', DI\get(ContainerKeys::ENABLE_CACHE))
+        ->parameter('cacheDir', CACHE_DIRECTORY),
+
     CommandBus::class => DI\factory([CommandBusFactory::class, 'create'])
         ->parameter('locator', DI\get(HandlerLocator::class)),
+
+    HandleBadRequests::class => function (ContainerInterface $c) {
+        return new HandleBadRequests(
+            $c->get(SerializerInterface::class)
+        );
+    },
 
 ];

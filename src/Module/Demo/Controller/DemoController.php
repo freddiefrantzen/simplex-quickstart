@@ -2,6 +2,7 @@
 
 namespace Simplex\Quickstart\Module\Demo\Controller;
 
+use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Simplex\Quickstart\Module\Demo\Command\Register;
@@ -11,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DemoController extends AppController
 {
+    const LOCATION_HEADER_NAME = 'Location';
+
     /** @var PersonRepository */
     private $personRepository;
 
@@ -22,27 +25,27 @@ class DemoController extends AppController
     /**
      * @Route("/", methods={"GET"}, name="list_people")
      */
-    public function index(Request $request, Response $response): Response
+    public function index(): Response
     {
         $people = $this->personRepository->findAll();
 
-        return $this->jsonResponse($response, $people);
+        return $this->jsonResponse($people);
     }
 
     /**
      * @Route("/person/{id}", methods={"GET"}, name="get_person")
      */
-    public function get(Request $request, Response $response, $id): Response
+    public function get(string $id): Response
     {
         $person = $this->personRepository->ofId($id);
 
-        return $this->jsonResponse($response, $person);
+        return $this->jsonResponse($person);
     }
 
     /**
      * @Route("/person", methods={"POST"}, name="register")
      */
-    public function post(Request $request, Response $response): Response
+    public function post(Request $request): Response
     {
         $command = $this->map($request, Register::class);
 
@@ -50,6 +53,8 @@ class DemoController extends AppController
 
         $person = $this->personRepository->ofUsername($command->email);
 
-        return $this->createResponse($response, $person->getId()->toString());
+        $this->setHeader(self::LOCATION_HEADER_NAME, $person->getId()->toString());
+
+        return $this->jsonResponse(null, Httpstatuscodes::HTTP_CREATED);
     }
 }
