@@ -2,6 +2,7 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
+use Psr\Http;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
@@ -9,7 +10,6 @@ use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\Diactoros\Stream;
 use Zend\Diactoros\Uri;
-use Psr\Http;
 
 trait HttpRequestCapabilities
 {

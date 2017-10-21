@@ -3,9 +3,9 @@
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Simplex\Bootstrap;
 use Simplex\HttpApplication;
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\Response;
+use Zend\Diactoros\Response\SapiEmitter;
+use Zend\Diactoros\ServerRequestFactory;
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 

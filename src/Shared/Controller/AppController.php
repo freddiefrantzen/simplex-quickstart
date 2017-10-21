@@ -2,9 +2,9 @@
 
 namespace Simplex\Quickstart\Shared\Controller;
 
-use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use JMS\Serializer\Exception\Exception as SerializerException;
 use League\Tactician\CommandBus;
+use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Simplex\BaseController;
 use Simplex\Quickstart\Shared\Exception\BadRequestException;

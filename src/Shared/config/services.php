@@ -5,14 +5,14 @@ use JMS\Serializer\SerializerInterface;
 use League\Tactician\CommandBus;
 use Psr\Container\ContainerInterface;
 use Simplex\ContainerKeys;
-use Simplex\Quickstart\Shared\Controller\AppController;
 use Simplex\Quickstart\Shared\CommandBus\HandlerLocator;
+use Simplex\Quickstart\Shared\Controller\AppController;
 use Simplex\Quickstart\Shared\Factory\CommandBusFactory;
 use Simplex\Quickstart\Shared\Factory\DoctrineOrmFactory;
 use Simplex\Quickstart\Shared\Factory\SerializerFactory;
-use Simplex\Quickstart\Shared\Testing\FixtureLoader;
 use Simplex\Quickstart\Shared\Factory\ValidatorFactory;
 use Simplex\Quickstart\Shared\HttpMiddleware\HandleBadRequests;
+use Simplex\Quickstart\Shared\Testing\FixtureLoader;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
