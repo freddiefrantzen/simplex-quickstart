@@ -11,6 +11,9 @@ class SerializerFactory
 {
     const SERIALIZER_CACHE_DIR = DIRECTORY_SEPARATOR . 'serializer';
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function create(UrlGenerator $urlGenerator, bool $enableCache, string $cacheDir, bool $debugMode): Hateoas
     {
         if ($enableCache) {

@@ -12,6 +12,9 @@ use PHPUnit\Runner\PhptTestCase;
 use PHPUnit\TextUI\ResultPrinter as PhpUnitResultPrinter;
 use SebastianBergmann\Comparator\ComparisonFailure;
 
+/**
+ * @SuppressWarnings(PHPMD)
+ */
 class TestResultPrinter extends PhpUnitResultPrinter
 {
     const INDENT = '      ';

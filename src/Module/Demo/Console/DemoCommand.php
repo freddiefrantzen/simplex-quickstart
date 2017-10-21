@@ -18,6 +18,9 @@ class DemoCommand extends Command
         ;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // ...

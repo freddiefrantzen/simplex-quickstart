@@ -21,6 +21,9 @@ class DropDatabaseCommand extends Command
     /** @var string */
     private $name;
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         string $host,
         string $port,
@@ -57,6 +60,9 @@ class DropDatabaseCommand extends Command
         ;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if ($input->getOption(self::OPTION_IF_EXISTS)

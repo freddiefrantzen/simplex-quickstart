@@ -26,6 +26,9 @@ class DoctrineOrmFactory
 
     const UUID_TYPE_NAME = 'uuid';
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function create(
         string $host,
         string $port,
@@ -51,6 +54,9 @@ class DoctrineOrmFactory
         return EntityManager::create($connectionOptions, $config);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ElseExpression)
+     */
     private function createConfig(string $cacheDir, bool $enableCache): Configuration
     {
         $cacheDir = rtrim($cacheDir, DIRECTORY_SEPARATOR);
