@@ -26,4 +26,3 @@ return [
         return $c->get(EntityManager::class)->getRepository(Person::class);
     },
 ];
-

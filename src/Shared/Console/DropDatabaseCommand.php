@@ -26,8 +26,8 @@ class DropDatabaseCommand extends Command
         string $port,
         string $name,
         string $user,
-        string $pass)
-    {
+        string $pass
+    ) {
         $this->connection = DriverManager::getConnection(
             [
                 'driver' => 'pdo_mysql',
@@ -70,4 +70,3 @@ class DropDatabaseCommand extends Command
         $output->writeln(sprintf('<info>Dropped database <comment>%s</comment></info>', $this->name));
     }
 }
-

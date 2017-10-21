@@ -16,7 +16,11 @@ Bootstrap::init(__DIR__ . '/../config');
 $application = new HttpApplication(Bootstrap::getContainer());
 
 $request = ServerRequestFactory::fromGlobals(
-    $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
+    $_SERVER,
+    $_GET,
+    $_POST,
+    $_COOKIE,
+    $_FILES
 );
 
 $response = $application->handleRequest($request, new Response());

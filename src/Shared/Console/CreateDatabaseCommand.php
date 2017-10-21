@@ -26,8 +26,8 @@ class CreateDatabaseCommand extends Command
         string $port,
         string $name,
         string $user,
-        string $pass)
-    {
+        string $pass
+    ) {
         $this->connection = DriverManager::getConnection(
             [
                 'driver' => 'pdo_mysql',

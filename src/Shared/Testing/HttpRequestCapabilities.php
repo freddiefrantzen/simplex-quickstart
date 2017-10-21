@@ -50,7 +50,7 @@ trait HttpRequestCapabilities
         return $application->handleRequest($request, new Response());
     }
 
-    public function sendPost(string $uri,  array $body, array $headers = []): ResponseInterface
+    public function sendPost(string $uri, array $body, array $headers = []): ResponseInterface
     {
         $stream = $this->streamFor($body);
 
@@ -78,7 +78,7 @@ trait HttpRequestCapabilities
         return new Stream($stream);
     }
 
-    public function sendPut(string $uri,  array $body, array $headers = []): ResponseInterface
+    public function sendPut(string $uri, array $body, array $headers = []): ResponseInterface
     {
         $stream = $this->streamFor($body);
 

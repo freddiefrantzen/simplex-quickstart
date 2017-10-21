@@ -35,6 +35,8 @@ return [
         );
     },
 
+    // @codingStandardsIgnoreStart
+
     \Doctrine\DBAL\Tools\Console\Command\RunSqlCommand::class => \DI\create(\Doctrine\DBAL\Tools\Console\Command\RunSqlCommand::class),
     \Doctrine\DBAL\Tools\Console\Command\ImportCommand::class => \DI\create(\Doctrine\DBAL\Tools\Console\Command\ImportCommand::class),
 
@@ -54,6 +56,8 @@ return [
     \Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand::class => \DI\create(\Doctrine\ORM\Tools\Console\Command\ValidateSchemaCommand::class),
     \Doctrine\ORM\Tools\Console\Command\InfoCommand::class => \DI\create(\Doctrine\ORM\Tools\Console\Command\InfoCommand::class),
     \Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand::class => \DI\create(\Doctrine\ORM\Tools\Console\Command\MappingDescribeCommand::class),
+
+    // @codingStandardsIgnoreEnd
 
     ContainerKeys::CONSOLE_COMMANDS => DI\add([
         DI\get(CreateDatabaseCommand::class),

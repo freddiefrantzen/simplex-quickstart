@@ -55,7 +55,9 @@ class Person
      */
     private $passwordHash;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public static function register(string $name, string $email, string $password): Person
     {

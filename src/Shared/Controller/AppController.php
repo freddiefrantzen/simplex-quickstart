@@ -47,7 +47,7 @@ abstract class AppController extends BaseController
     private function deserializeRequest(Request $request, string $commandClass)
     {
         try {
-            $command = $this->serializer->deserialize((string)$request->getBody(), $commandClass, parent::JSON_FORMAT);
+            $command = $this->serializer->deserialize((string) $request->getBody(), $commandClass, parent::JSON_FORMAT);
         } catch (SerializerException $exception) {
             throw new BadRequestException("Invalid request body", Httpstatuscodes::HTTP_BAD_REQUEST, $exception);
         }

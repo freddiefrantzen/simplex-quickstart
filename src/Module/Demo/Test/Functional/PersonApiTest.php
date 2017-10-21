@@ -15,7 +15,8 @@ class PersonApiTest extends FunctionalTest
         $body = $this->getBody($response);
 
         self::assertCount(1, $body);
-        self::assertJsonDocumentMatchesSchema(json_encode($body[0]),
+        self::assertJsonDocumentMatchesSchema(
+            json_encode($body[0]),
             [
                 '$.name' => 'Joe Smith',
                 '$.email' => 'joe@example.com',
@@ -27,14 +28,16 @@ class PersonApiTest extends FunctionalTest
     {
         $response = $this->sendGet('/person/' . PersonLoader::PERSON_1_ID);
 
-        self::assertMessageBodyMatchesJson($response,
+        self::assertMessageBodyMatchesJson(
+            $response,
             [
                 '$.name' => 'Joe Smith',
                 '$.email' => 'joe@example.com'
             ]
         );
 
-        self::assertJsonDocumentMatchesSchema($this->getRawBody($response),
+        self::assertJsonDocumentMatchesSchema(
+            $this->getRawBody($response),
             [
                 'type'       => 'object',
                 'required'   => ['name', 'email', '_links'],
@@ -49,7 +52,8 @@ class PersonApiTest extends FunctionalTest
 
     public function test_it_can_create_a_new_person()
     {
-        $response = $this->sendPost('/person',
+        $response = $this->sendPost(
+            '/person',
             [
                 'name' => 'Will',
                 'email' => 'will@example.com',
@@ -65,7 +69,8 @@ class PersonApiTest extends FunctionalTest
     {
         $this->reloadDb = false;
 
-        $response = $this->sendPost('/person',
+        $response = $this->sendPost(
+            '/person',
             [
                 'name' => 'Will',
                 'email' => 'will@example.com',
@@ -73,7 +78,8 @@ class PersonApiTest extends FunctionalTest
         );
 
         self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
-        self::assertMessageBodyMatchesJson($response,
+        self::assertMessageBodyMatchesJson(
+            $response,
             [
                 '$.[0].property' => 'password',
                 '$.[0].message' => 'This value should not be blank.'
@@ -85,7 +91,8 @@ class PersonApiTest extends FunctionalTest
     {
         $this->reloadDb = false;
 
-        $response = $this->sendPost('/person',
+        $response = $this->sendPost(
+            '/person',
             [
                 'name' => 'Will',
                 'email' => 'will@example.com',
@@ -94,7 +101,8 @@ class PersonApiTest extends FunctionalTest
         );
 
         self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
-        self::assertMessageBodyMatchesJson($response,
+        self::assertMessageBodyMatchesJson(
+            $response,
             [
                 '$.[0].property' => 'password',
                 '$.[0].message' => 'This value should not be blank.'
@@ -106,7 +114,8 @@ class PersonApiTest extends FunctionalTest
     {
         $this->reloadDb = false;
 
-        $response = $this->sendPost('/person',
+        $response = $this->sendPost(
+            '/person',
             [
                 'name' => '',
                 'email' => 'will@example.com',
@@ -115,7 +124,8 @@ class PersonApiTest extends FunctionalTest
         );
 
         self::assertResponseHasStatus($response, Httpstatuscodes::HTTP_BAD_REQUEST);
-        self::assertMessageBodyMatchesJson($response,
+        self::assertMessageBodyMatchesJson(
+            $response,
             [
                 '$.[0].property' => 'name',
                 '$.[0].message' => 'This value should not be blank.'

@@ -33,8 +33,8 @@ class DoctrineOrmFactory
         string $user,
         string $pass,
         string $cacheDir,
-        bool $enableCache) : EntityManager
-    {
+        bool $enableCache
+    ) : EntityManager {
         $connectionOptions = array(
             'driver' => 'pdo_mysql',
             'host' => $host,
