@@ -15,5 +15,6 @@ database:
 test:
     pre:
         - composer validate
+        - vendor/bin/phpcs --standard=vendor/simplex/simplex/phpcs.xml --basepath="." bin config public src
     override:
         - vendor/bin/phpunit
