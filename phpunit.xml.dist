@@ -6,7 +6,6 @@
     bootstrap="phpunit_bootstrap.php">
 
     <testsuites>
-
         <testsuite name="unit">
             <directory>src/Module/Demo/Test/Unit</directory>
         </testsuite>
@@ -19,8 +18,19 @@
         <testsuite name="core">
             <directory>vendor/simplex/simplex/tests</directory>
         </testsuite>
-
     </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">bin</directory>
+            <directory suffix=".php">public</directory>
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/Shared/config</directory>
+                <directory suffix=".php">src/Module/Demo/config</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 
     <php>
         <const name="PHP_WEBSERVER_HOST" value="localhost" />
