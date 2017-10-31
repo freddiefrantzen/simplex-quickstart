@@ -2,40 +2,43 @@
 
 namespace Simplex\Quickstart\Shared\Testing;
 
+use function GuzzleHttp\Psr7\stream_for;
+use Psr\Container\ContainerInterface;
 use Psr\Http;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\Stream;
 use Zend\Diactoros\Uri;
 
 trait HttpRequestCapabilities
 {
+    abstract public function getContainer(): ContainerInterface;
+
     public function sendGet(string $uri, array $queryParams = [], array $headers = []): ResponseInterface
     {
-        $request = $this->createRequest('GET', $uri)
+        $request = $this->createRequest('GET', $uri, $headers)
             ->withQueryParams($queryParams);
-
-        $request = $this->addHeaders($headers, $request);
 
         return $this->send($request);
     }
 
-    private function createRequest(string $method, string $uri): ServerRequestInterface
+    private function createRequest(string $method, string $uri, array $headers = []): ServerRequestInterface
     {
-        return (ServerRequestFactory::fromGlobals([]))
+        $request = (ServerRequestFactory::fromGlobals([]))
             ->withMethod($method)
             ->withUri(new Uri($uri));
-    }
 
-    private function addHeaders(array $headers, ServerRequestInterface $request): ServerRequestInterface
-    {
         if (empty($headers)) {
             return $request;
         }
 
+        return $this->addHeaders($headers, $request);
+    }
+
+    private function addHeaders(array $headers, ServerRequestInterface $request): ServerRequestInterface
+    {
         foreach ($headers as $headerName => $headerValue) {
             $request = $request->withHeader($headerName, $headerValue);
         }
@@ -52,49 +55,27 @@ trait HttpRequestCapabilities
 
     public function sendPost(string $uri, array $body, array $headers = []): ResponseInterface
     {
-        $stream = $this->streamFor($body);
+        $stream = stream_for(json_encode($body));
 
-        $request = $this->createRequest('POST', $uri)
+        $request = $this->createRequest('POST', $uri, $headers)
             ->withBody($stream);
-
-        $request = $this->addHeaders($headers, $request);
 
         return $this->send($request);
     }
 
-    /**
-     * @see https://github.com/guzzle/psr7/blob/master/src/functions.php
-     */
-    private function streamFor(array $body): Stream
-    {
-        $resource = json_encode($body);
-
-        $stream = fopen('php://temp', 'r+');
-        if ($resource !== '') {
-            fwrite($stream, $resource);
-            fseek($stream, 0);
-        }
-
-        return new Stream($stream);
-    }
-
     public function sendPut(string $uri, array $body, array $headers = []): ResponseInterface
     {
-        $stream = $this->streamFor($body);
+        $stream = stream_for(json_encode($body));
 
-        $request = $this->createRequest('PUT', $uri)
+        $request = $this->createRequest('PUT', $uri, $headers)
             ->withBody($stream);
-
-        $request = $this->addHeaders($headers, $request);
 
         return $this->send($request);
     }
 
     public function sendDelete(string $uri, array $headers = []): ResponseInterface
     {
-        $request = $this->createRequest('DELETE', $uri);
-
-        $request = $this->addHeaders($headers, $request);
+        $request = $this->createRequest('DELETE', $uri, $headers);
 
         return $this->send($request);
     }

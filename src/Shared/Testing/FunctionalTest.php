@@ -41,11 +41,6 @@ class FunctionalTest extends TestCase
         parent::tearDown();
     }
 
-    public function getFromContainer(string $id)
-    {
-        return $this->getContainer()->get($id);
-    }
-
     public function getContainer(): Container
     {
         if (!isset(self::$container)) {
@@ -54,6 +49,11 @@ class FunctionalTest extends TestCase
         }
 
         return self::$container;
+    }
+
+    public function getFromContainer(string $id)
+    {
+        return $this->getContainer()->get($id);
     }
 
     public function setInContainer($name, $value): void
