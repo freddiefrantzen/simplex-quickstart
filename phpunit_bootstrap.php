@@ -1,8 +1,6 @@
 <?php
 
-/** @var \Composer\Autoload\ClassLoader $loader */
-$loader = require __DIR__.'/vendor/autoload.php';
-\Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+require __DIR__.'/vendor/autoload.php';
 
 // Parameters set in .ev.testing will not be overloaded
 if (is_readable(__DIR__  . '/.env.testing')) {

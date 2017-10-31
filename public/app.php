@@ -1,15 +1,12 @@
 <?php
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Simplex\Bootstrap;
 use Simplex\HttpApplication;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Response\SapiEmitter;
 use Zend\Diactoros\ServerRequestFactory;
 
-$loader = require __DIR__.'/../vendor/autoload.php';
-
-AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+require __DIR__.'/../vendor/autoload.php';
 
 Bootstrap::init(__DIR__ . '/../config');
 

@@ -1,15 +1,12 @@
 #!/usr/bin/env php
 <?php
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Simplex\Bootstrap;
 use Simplex\ConsoleApplication;
 
 set_time_limit(0);
 
-$loader = require __DIR__.'/../vendor/autoload.php';
-
-AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+require __DIR__.'/../vendor/autoload.php';
 
 Bootstrap::init( __DIR__ . '/../config');
 
