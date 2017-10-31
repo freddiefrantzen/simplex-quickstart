@@ -10,7 +10,7 @@ use Simplex\Quickstart\Module\Demo\Repository\PersonRepository;
 
 return [
 
-    FooCommand::class => function(ContainerInterface $c) {
+    FooCommand::class => function() {
         return new DemoCommand();
     },
 
