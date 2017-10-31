@@ -66,6 +66,7 @@ class Person
         $person->id = Uuid::uuid4();
         $person->name = $name;
         $person->email = $email;
+        /** @scrutinizer ignore-call */
         $person->passwordHash = password_hash($password, \PASSWORD_DEFAULT);
 
         return $person;
