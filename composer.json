@@ -23,7 +23,8 @@
         "league/tactician": "^1.0",
         "ramsey/uuid-doctrine": "^1.2",
         "symfony/process": "^3.3",
-        "symfony/validator": "^3.3"
+        "symfony/validator": "^3.3",
+        "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {
         "guzzlehttp/psr7": "^1.4",

@@ -5,13 +5,22 @@ namespace Simplex\Quickstart\Shared\Factory;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\EventManager;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
+use Gedmo\DoctrineExtensions as GedmoExtensions;
+use Gedmo\Timestampable\TimestampableListener;
 use Ramsey\Uuid\Doctrine\UuidType;
+use Simplex\Quickstart\Shared\Doctrine\Type\DateTimeMicroType;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class DoctrineOrmFactory
 {
     const DOCTRINE_CACHE_DIRECTORY = 'doctrine';
@@ -24,8 +33,6 @@ class DoctrineOrmFactory
 
     const ENTITY_DIRECTORY_NAME = 'Model';
 
-    const UUID_TYPE_NAME = 'uuid';
-
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -37,53 +44,54 @@ class DoctrineOrmFactory
         string $pass,
         string $cacheDir,
         bool $enableCache
-    ) : EntityManager {
-        $connectionOptions = array(
+    ): EntityManager {
+
+        $connectionOptions = [
             'driver' => 'pdo_mysql',
             'host' => $host,
             'port' => $port,
             'dbname' => $name,
             'user' => $user,
             'password' => $pass,
-        );
+        ];
 
-        $config = $this->createConfig($cacheDir, $enableCache);
+        $annotationReader = new AnnotationReader();
+
+        $config = $this->buildConfig($cacheDir, $enableCache, $annotationReader);
 
         $this->addCustomTypes();
 
-        return EntityManager::create($connectionOptions, $config);
+        $entityManager = $this->buildEntityManager($annotationReader, $connectionOptions, $config);
+
+        return $entityManager;
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ElseExpression)
-     */
-    private function createConfig(string $cacheDir, bool $enableCache): Configuration
+    private function buildConfig(string $cacheDir, bool $enableCache, AnnotationReader $annotationReader): Configuration
     {
-        $cacheDir = rtrim($cacheDir, DIRECTORY_SEPARATOR);
-
-        if (!$enableCache) {
-            $cache = new ArrayCache();
-        } else {
-            $cache = new FilesystemCache($cacheDir . DIRECTORY_SEPARATOR . self::DOCTRINE_CACHE_DIRECTORY);
-        }
-
         $config = new Configuration;
 
-        $driverImpl = new AnnotationDriver(new AnnotationReader(), $this->getEntityDirPaths());
+        $this->configureMetadataDrivers($annotationReader, $config);
 
-        $config->setMetadataDriverImpl($driverImpl);
-        $config->setMetadataCacheImpl($cache);
-        $config->setQueryCacheImpl($cache);
-        $config->setProxyDir($cacheDir . DIRECTORY_SEPARATOR . self::PROXY_DIRECTORY);
-        $config->setProxyNamespace(self::PROXY_NAMESPACE);
+        $this->configureCache($cacheDir, $enableCache, $config);
 
-        if ($enableCache) {
-            $config->setAutoGenerateProxyClasses(true);
-        } else {
-            $config->setAutoGenerateProxyClasses(false);
-        }
+        $this->configureNamingStrategy($config);
 
         return $config;
+    }
+
+    private function configureMetadataDrivers(AnnotationReader $annotationReader, Configuration $config): void
+    {
+        $driverChain = new MappingDriverChain();
+
+        $defaultDriver = new AnnotationDriver($annotationReader, $this->getEntityDirPaths());
+
+        $driverChain->setDefaultDriver($defaultDriver);
+        $config->setMetadataDriverImpl($driverChain); // was driver imp
+
+        GedmoExtensions::registerAbstractMappingIntoDriverChainORM(
+            $driverChain,
+            $annotationReader
+        );
     }
 
     private function getEntityDirPaths(): array
@@ -102,8 +110,70 @@ class DoctrineOrmFactory
         return $paths;
     }
 
-    private function addCustomTypes()
+    /**
+     * @SuppressWarnings(PHPMD.ElseExpression)
+     */
+    private function configureCache(string $cacheDir, bool $enableCache, Configuration $config): void
     {
-        Type::addType(self::UUID_TYPE_NAME, UuidType::class);
+        $cacheDir = rtrim($cacheDir, DIRECTORY_SEPARATOR);
+
+        if (!$enableCache) {
+            $cache = new ArrayCache();
+        } else {
+            $cache = new FilesystemCache($cacheDir . DIRECTORY_SEPARATOR . self::DOCTRINE_CACHE_DIRECTORY);
+        }
+
+        $config->setMetadataCacheImpl($cache);
+        $config->setQueryCacheImpl($cache);
+        $config->setProxyDir($cacheDir . DIRECTORY_SEPARATOR . self::PROXY_DIRECTORY);
+        $config->setProxyNamespace(self::PROXY_NAMESPACE);
+
+        if ($enableCache) {
+            $config->setAutoGenerateProxyClasses(true);
+        } else {
+            $config->setAutoGenerateProxyClasses(false);
+        }
+    }
+
+    private function configureNamingStrategy(Configuration $config): void
+    {
+        $namingStrategy = new UnderscoreNamingStrategy(CASE_LOWER);
+        $config->setNamingStrategy($namingStrategy);
+    }
+
+    private function addCustomTypes(): void
+    {
+        Type::addType(UuidType::NAME, UuidType::class);
+        Type::addType(DateTimeMicroType::NAME, DateTimeMicroType::class);
+    }
+
+    private function buildEntityManager(
+        AnnotationReader $annotationReader,
+        array $connectionOptions,
+        Configuration$config
+    ): EntityManager {
+
+        $eventManager = $this->buildEventManager($annotationReader);
+
+        $entityManager = EntityManager::create($connectionOptions, $config, $eventManager);
+
+        return $entityManager;
+    }
+
+    private function buildEventManager(AnnotationReader $annotationReader): EventManager
+    {
+        $eventManager = new EventManager();
+
+        $this->addEventListeners($annotationReader, $eventManager);
+
+        return $eventManager;
+    }
+
+    private function addEventListeners(AnnotationReader $annotationReader, EventManager $eventManager): void
+    {
+        $timestampableListener = new TimestampableListener();
+        $timestampableListener->setAnnotationReader($annotationReader);
+
+        $eventManager->addEventSubscriber($timestampableListener);
     }
 }
