@@ -21,13 +21,16 @@
     </testsuites>
 
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+        <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">bin</directory>
             <directory suffix=".php">public</directory>
             <directory suffix=".php">src</directory>
             <exclude>
                 <directory suffix=".php">src/Shared/config</directory>
-                <directory suffix=".php">src/Module/Demo/config</directory>
+                <directory suffix=".php">src/Shared/Test</directory>
+                <directory suffix=".php">src/Shared/Testing</directory>
+                <directory suffix=".php">src/Module/*/config</directory>
+                <directory suffix=".php">src/Module/*/Test</directory>
             </exclude>
         </whitelist>
     </filter>
