@@ -1,7 +1,6 @@
 <?php
 
 use Simplex\ContainerKeys;
-use Simplex\Environment;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
@@ -11,7 +10,7 @@ use Simplex\Quickstart\Shared\HttpMiddleware\HandleBadRequests;
 
 return [
 
-    ContainerKeys::EDITOR => DI\env(Environment::EDITOR_ENV_VAR, 'phpstorm'),
+    ContainerKeys::EDITOR => DI\env('EDITOR', 'phpstorm'),
 
     ContainerKeys::MIDDLEWARE => [
         RegisterExceptionHandler::class,

@@ -14,12 +14,17 @@ class SerializerFactory
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
-    public function create(UrlGenerator $urlGenerator, bool $enableCache, string $cacheDir, bool $debugMode): Hateoas
-    {
+    public function create(
+        UrlGenerator $urlGenerator,
+        bool $enableCache,
+        \SplFileInfo $cacheDir,
+        bool $debugMode
+    ): Hateoas {
+
         if ($enableCache) {
             return HateoasBuilder::create()
                 ->setUrlGenerator(null, new SymfonyUrlGenerator($urlGenerator))
-                ->setCacheDir($cacheDir . self::SERIALIZER_CACHE_DIR)
+                ->setCacheDir($cacheDir->getPathname(). self::SERIALIZER_CACHE_DIR)
                 ->setDebug($debugMode)
                 ->build();
         }

@@ -42,7 +42,7 @@ class DoctrineOrmFactory
         string $name,
         string $user,
         string $pass,
-        string $cacheDir,
+        \SplFileInfo $cacheDir,
         bool $enableCache
     ): EntityManager {
 
@@ -66,8 +66,12 @@ class DoctrineOrmFactory
         return $entityManager;
     }
 
-    private function buildConfig(string $cacheDir, bool $enableCache, AnnotationReader $annotationReader): Configuration
-    {
+    private function buildConfig(
+        \SplFileInfo $cacheDir,
+        bool $enableCache,
+        AnnotationReader $annotationReader
+    ): Configuration {
+
         $config = new Configuration;
 
         $this->configureMetadataDrivers($annotationReader, $config);
@@ -86,7 +90,7 @@ class DoctrineOrmFactory
         $defaultDriver = new AnnotationDriver($annotationReader, $this->getEntityDirPaths());
 
         $driverChain->setDefaultDriver($defaultDriver);
-        $config->setMetadataDriverImpl($driverChain); // was driver imp
+        $config->setMetadataDriverImpl($driverChain);
 
         GedmoExtensions::registerAbstractMappingIntoDriverChainORM(
             $driverChain,
@@ -113,19 +117,19 @@ class DoctrineOrmFactory
     /**
      * @SuppressWarnings(PHPMD.ElseExpression)
      */
-    private function configureCache(string $cacheDir, bool $enableCache, Configuration $config): void
+    private function configureCache(\SplFileInfo $cacheDir, bool $enableCache, Configuration $config): void
     {
-        $cacheDir = rtrim($cacheDir, DIRECTORY_SEPARATOR);
-
         if (!$enableCache) {
             $cache = new ArrayCache();
         } else {
-            $cache = new FilesystemCache($cacheDir . DIRECTORY_SEPARATOR . self::DOCTRINE_CACHE_DIRECTORY);
+            $cache = new FilesystemCache(
+                $cacheDir->getPathname() . DIRECTORY_SEPARATOR . self::DOCTRINE_CACHE_DIRECTORY
+            );
         }
 
         $config->setMetadataCacheImpl($cache);
         $config->setQueryCacheImpl($cache);
-        $config->setProxyDir($cacheDir . DIRECTORY_SEPARATOR . self::PROXY_DIRECTORY);
+        $config->setProxyDir($cacheDir->getPathname() . DIRECTORY_SEPARATOR . self::PROXY_DIRECTORY);
         $config->setProxyNamespace(self::PROXY_NAMESPACE);
 
         if ($enableCache) {

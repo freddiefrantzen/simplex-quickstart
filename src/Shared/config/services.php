@@ -43,18 +43,18 @@ return [
         ->parameter('name', DI\get('db.name'))
         ->parameter('user', DI\get('db.user'))
         ->parameter('pass', DI\get('db.pass'))
-        ->parameter('cacheDir', CACHE_DIRECTORY)
+        ->parameter('cacheDir', DI\get(ContainerKeys::CACHE_DIRECTORY))
         ->parameter('enableCache', DI\get(ContainerKeys::ENABLE_CACHE)),
 
     SerializerInterface::class => DI\factory([SerializerFactory::class, 'create'])
         ->parameter('urlGenerator', DI\get(UrlGenerator::class))
         ->parameter('enableCache', DI\get(ContainerKeys::ENABLE_CACHE))
-        ->parameter('cacheDir', CACHE_DIRECTORY)
+        ->parameter('cacheDir', DI\get(ContainerKeys::CACHE_DIRECTORY))
         ->parameter('debugMode', DI\get(ContainerKeys::DEBUG_MODE)),
 
     ValidatorInterface::class => DI\factory([ValidatorFactory::class, 'create'])
         ->parameter('enableCache', DI\get(ContainerKeys::ENABLE_CACHE))
-        ->parameter('cacheDir', CACHE_DIRECTORY),
+        ->parameter('cacheDir', DI\get(ContainerKeys::CACHE_DIRECTORY)),
 
     CommandBus::class => DI\factory([CommandBusFactory::class, 'create'])
         ->parameter('locator', DI\get(HandlerLocator::class)),

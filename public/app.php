@@ -8,9 +8,9 @@ use Zend\Diactoros\ServerRequestFactory;
 
 require __DIR__.'/../vendor/autoload.php';
 
-Bootstrap::init(__DIR__ . '/../config');
+$container = (new Bootstrap(__DIR__ . '/../'))->getContainer();
 
-$application = new HttpApplication(Bootstrap::getContainer());
+$application = new HttpApplication($container);
 
 $request = ServerRequestFactory::fromGlobals(
     $_SERVER,

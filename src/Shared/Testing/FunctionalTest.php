@@ -15,7 +15,7 @@ class FunctionalTest extends TestCase
     use JsonAssertions;
     use Psr7Assertions;
 
-    const CONFIG_DIRECTORY_PATH = __DIR__ . '/../../../config';
+    const PATH_TO_PROJECT_ROOT = __DIR__ . '/../../../';
 
     protected $reloadDb = true;
 
@@ -44,8 +44,7 @@ class FunctionalTest extends TestCase
     public function getContainer(): Container
     {
         if (!isset(self::$container)) {
-            Bootstrap::init(self::CONFIG_DIRECTORY_PATH);
-            self::$container = Bootstrap::getContainer();
+            self::$container = (new Bootstrap(self::PATH_TO_PROJECT_ROOT))->getContainer();
         }
 
         return self::$container;

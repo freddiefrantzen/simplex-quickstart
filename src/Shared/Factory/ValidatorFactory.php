@@ -12,7 +12,7 @@ class ValidatorFactory
 {
     const VALIDATOR_CACHE_DIRECTORY = 'validator';
 
-    public function create(bool $enableCache, string $cacheDir): ValidatorInterface
+    public function create(bool $enableCache, \SplFileInfo $cacheDir): ValidatorInterface
     {
         $validationBuilder = Validation::createValidatorBuilder();
 
@@ -22,7 +22,7 @@ class ValidatorFactory
                 ->getValidator();
         }
 
-        $cache = new FilesystemCache($cacheDir . DIRECTORY_SEPARATOR . self::VALIDATOR_CACHE_DIRECTORY);
+        $cache = new FilesystemCache($cacheDir->getPathname() . DIRECTORY_SEPARATOR . self::VALIDATOR_CACHE_DIRECTORY);
 
         $annotationReader = new CachedReader(new AnnotationReader(), $cache);
 
