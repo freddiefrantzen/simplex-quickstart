@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Simplex\Quickstart\Functional\Test;
 
@@ -28,7 +28,7 @@ class WebApplicationTest extends TestCase
 
         $this->runProcessWithRetry($process);
 
-        self::assertContains('"name":"'. PersonLoader::PERSON_1_NAME . '"', $process->getOutput());
+        self::assertContains('"name":"' . PersonLoader::PERSON_1_NAME . '"', $process->getOutput());
     }
 
     private function runProcessWithRetry(Process $process): void

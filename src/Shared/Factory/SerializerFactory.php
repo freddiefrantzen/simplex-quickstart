@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Simplex\Quickstart\Shared\Factory;
 
@@ -24,7 +24,7 @@ class SerializerFactory
         if ($enableCache) {
             return HateoasBuilder::create()
                 ->setUrlGenerator(null, new SymfonyUrlGenerator($urlGenerator))
-                ->setCacheDir($cacheDir->getPathname(). self::SERIALIZER_CACHE_DIR)
+                ->setCacheDir($cacheDir->getPathname() . self::SERIALIZER_CACHE_DIR)
                 ->setDebug($debugMode)
                 ->build();
         }

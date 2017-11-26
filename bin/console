@@ -6,7 +6,7 @@ use Simplex\ConsoleApplication;
 
 set_time_limit(0);
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $container = (new Bootstrap(__DIR__ . '/../'))->getContainer();
 
