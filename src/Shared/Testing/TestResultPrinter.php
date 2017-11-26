@@ -4,6 +4,7 @@ namespace Simplex\Quickstart\Shared\Testing;
 
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\SelfDescribing;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\TestFailure;
@@ -17,82 +18,84 @@ use SebastianBergmann\Comparator\ComparisonFailure;
  */
 class TestResultPrinter extends PhpUnitResultPrinter
 {
-    const INDENT = '      ';
+    private const INDENT = '      ';
 
-    public function endTest(Test $test, $time)
+    private const LINE_FEED = "\n";
+
+    private const RED = 'fg-red';
+    private const WHITE = 'fg-white';
+    private const WHITE_BOLD = 'fg-white, bold';
+    private const GREEN = 'fg-green';
+    private const CYAN_BOLD = 'fg-cyan, bold';
+
+    private const GREEN_BLOCK = 'fgg-green, bg-green';
+    private const RED_BLOCK = 'fgg-red, bg-red';
+
+    private const CROSS_SYMBOL = '✘';
+    private const TICK_SYMBOL = '✓';
+
+    public function addError(Test $test, \Exception $e, $time)
     {
-        if (!$this->lastTestFailed) {
-            $this->write(self::INDENT);
-            $this->writeWithColor('fg-green', '✓ ', false);
-            $this->printDescription($test, $time);
-        }
+        $this->printFailureInfoLine($test, $time);
 
-        if ($test instanceof TestCase) {
-            $this->numAssertions += $test->getNumAssertions();
-        } elseif ($test instanceof PhptTestCase) {
-            $this->numAssertions++;
-        }
-
-        $this->lastTestFailed = false;
-
-        if ($test instanceof TestCase) {
-            if (!$test->hasExpectationOnOutput()) {
-                $this->write($test->getActualOutput());
-            }
-        }
+        $this->lastTestFailed = true;
     }
 
-    private function printDescription(Test $test, $time)
+    private function printFailureInfoLine(Test $test, $time): void
     {
-        $raw =\PHPUnit\Util\Test::describe($test);
-        $parts =  explode('::', $raw);
+        $this->write(self::INDENT);
+        $this->writeWithColor(self::RED, self::CROSS_SYMBOL . ' ', false);
+        $this->printTestDescription($test, $time);
+    }
 
-        $this->writeWithColor(
-            'fg-cyan, bold',
-            $parts[0] . ': ',
-            false
-        );
+    private function printTestDescription(Test $test, $time)
+    {
+        $this->writeWithColor(self::CYAN_BOLD, $this->getTestClass($test), false);
 
-        if (count($parts) === 1) {
-            $this->write("\n");
+        if (!$this->isTestDescribable($test)) {
+            $this->write(self::LINE_FEED);
             return;
         }
 
-        $normalized = str_replace('_', ' ', $parts[1]);
-
-        $this->writeWithColor(
-            'fg-white',
-            $normalized,
-            false
-        );
-
-        $this->writeWithColor(
-            'fg-white',
-            $this->getTimeString($time)
-        );
+        $this->writeWithColor(self::CYAN_BOLD, ': ', false);
+        $this->writeWithColor(self::WHITE, $this->getTestDescription($test), false);
+        $this->writeWithColor(self::WHITE_BOLD, $this->getTimeAsString($time));
     }
 
-    private function getTimeString($time)
+    private function getTestClass(Test $test): string
+    {
+        return get_class($test);
+    }
+
+    private function isTestDescribable(Test $test): bool
+    {
+        return $test instanceof TestCase || $test instanceof  SelfDescribing;
+    }
+
+    private function getTestDescription(Test $test)
+    {
+        if ($test instanceof TestCase) {
+            return str_replace('_', ' ', $test->getName());
+        }
+
+        if ($test instanceof SelfDescribing) {
+            return $test->toString();
+        }
+
+        throw new \LogicException(get_class($test) . ' is not describable');
+    }
+
+    private function getTimeAsString(float $time): string
     {
         $ms = round($time * 1000);
 
         return ' ' . (string) $ms . 'ms';
     }
 
-    public function addError(Test $test, \Exception $e, $time)
-    {
-        $this->write(self::INDENT);
-        $this->writeWithColor('fg-red', '✘ ', false);
-        $this->printDescription($test, $time);
-
-        $this->lastTestFailed = true;
-    }
-
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
-        $this->write(self::INDENT);
-        $this->writeWithColor('fg-red', '✘ ', false);
-        $this->printDescription($test, $time);
+        $this->printFailureInfoLine($test, $time);
+
         $this->lastTestFailed = true;
     }
 
@@ -116,89 +119,142 @@ class TestResultPrinter extends PhpUnitResultPrinter
         $this->lastTestFailed = true;
     }
 
+    public function endTest(Test $test, $time)
+    {
+        if (!$this->lastTestFailed) {
+            $this->printSuccessLineInfo($test, $time);
+        }
+
+        $this->incrementAssertionCount($test);
+
+        $this->lastTestFailed = false;
+
+        if (!$test instanceof TestCase) {
+            return;
+        }
+
+        if ($test->hasExpectationOnOutput()) {
+            return;
+        }
+
+        $this->write($test->getActualOutput());
+    }
+
+    private function printSuccessLineInfo(Test $test, $time): void
+    {
+        $this->write(self::INDENT);
+        $this->writeWithColor(self::GREEN, self::TICK_SYMBOL . ' ', false);
+        $this->printTestDescription($test, $time);
+    }
+
+    private function incrementAssertionCount(Test $test): void
+    {
+        if ($test instanceof TestCase) {
+            $this->numAssertions += $test->getNumAssertions();
+        } elseif ($test instanceof PhptTestCase) {
+            ++$this->numAssertions;
+        }
+    }
+
     protected function printDefectTrace(TestFailure $defect)
     {
         $exception = $defect->thrownException();
 
-        $this->printException($exception);
+        $this->printExceptions($exception);
 
         if (!$exception instanceof ExpectationFailedException) {
-
             $this->printGotoTip($exception);
-
             return;
         }
 
-        $failure = $exception->getComparisonFailure();
+        $comparisonFailure = $exception->getComparisonFailure();
 
-        if (null === $failure) {
+        if (null === $comparisonFailure) {
             return;
         }
 
-        $this->printComparison($failure);
+        $this->printComparison($comparisonFailure);
     }
 
-    private function printException(\Exception $exception): void
+    private function printExceptions(\Throwable $exception): void
     {
-        $this->write("\n");
+        $this->printException($exception);
 
-        $lines = explode("\n", (string) $exception);
+        while ($previous = $exception->getPrevious()) {
+            $this->write(self::LINE_FEED . 'Caused by:' . self::LINE_FEED);
+            $this->printException($previous);
+        }
+    }
+
+    private function printException(\Throwable $exception): void
+    {
+        $this->write(self::LINE_FEED);
+
+        $lines = explode(self::LINE_FEED, (string) $exception);
 
         foreach ($lines as $line) {
             $this->write(self::INDENT);
-            $this->writeWithColor('fg-red, bg-red', ' ', false);
+            $this->writeWithColor(self::RED_BLOCK, ' ', false);
             $this->write('  ');
-            $this->writeWithColor('fg-white', $line);
-        }
-
-        while ($previous = $exception->getPrevious()) {
-            $this->write("\nCaused by\n" . $previous);
-            // @todo: format previous
+            $this->writeWithColor(self::WHITE, $line);
         }
     }
 
-    protected function printGotoTip(\Exception $exception): void
+    protected function printGotoTip(\Throwable $exception): void
     {
         $file = new \SplFileInfo($exception->getFile());
+
         $this->write(self::INDENT);
-        $this->writeWithColor('fg-red, bg-red', ' ', false);
-        $this->writeWithColor('fg-white, bold', '  Goto: ' . $file->getBasename() . ':' . $exception->getLine());
+        $this->writeWithColor(self::RED_BLOCK, ' ', false);
+        $this->writeWithColor(self::WHITE_BOLD, '  Goto: ' . $file->getBasename() . ':' . $exception->getLine());
     }
 
     private function printComparison(ComparisonFailure $failure): void
     {
+        $this->writeWithColor(self::CYAN_BOLD, self::INDENT . "Expected:");
+
+        $expected = $this->getExpectedAsString($failure);
+        $this->printComparisonDetail($expected, self::GREEN_BLOCK);
+
+        $this->writeWithColor(self::CYAN_BOLD, self::INDENT . "Actual");
+
+        $actual = $this->getActualAsString($failure);
+        $this->printComparisonDetail($actual, self::RED_BLOCK);
+    }
+
+    private function printComparisonDetail(string $detail, string $blockColor): void
+    {
+        $this->write(self::LINE_FEED);
+
+        $lines = explode(self::LINE_FEED, $detail);
+
+        foreach ($lines as $line) {
+            $this->write(self::INDENT);
+            $this->writeWithColor($blockColor, ' ', false);
+            $this->write('  ');
+            $this->writeWithColor(self::WHITE_BOLD, $line);
+        }
+    }
+
+    private function getExpectedAsString(ComparisonFailure $failure): string
+    {
         $expected = $failure->getExpectedAsString();
+
         if (empty($expected)) {
-            $expected = $failure->getExpected();
+            $expected = (string) $failure->getExpected();
         }
 
+        return $expected;
+    }
+
+    private function getActualAsString(ComparisonFailure $failure): string
+    {
         $actual = $failure->getActualAsString();
+
         if (empty($actual)) {
-            $actual = $failure->getActual();
+            $actual = (string) $failure->getActual();
         }
 
-        $this->write("\n");
-
-        $this->writeWithColor('fg-cyan, bold', self::INDENT . "Expected:");
-
-        $lines = explode("\n", $expected);
-        foreach ($lines as $line) {
-            $this->write(self::INDENT);
-            $this->writeWithColor('fg-red, bg-red', ' ', false);
-            $this->write('  ');
-            $this->writeWithColor('fg-white, bold', $line);
-        }
-
-        $this->write("\n");
-
-        $this->writeWithColor('fg-cyan, bold', self::INDENT . "Actual");
-
-        $lines = explode("\n", $actual);
-        foreach ($lines as $line) {
-            $this->write(self::INDENT);
-            $this->writeWithColor('fg-green, bg-green', ' ', false);
-            $this->write('  ');
-            $this->writeWithColor('fg-white, bold', $line);
-        }
+        return $actual;
     }
 }
