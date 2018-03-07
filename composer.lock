@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e154bf5bf7a7b91f3895ed3c2b652b7c",
+    "content-hash": "4b4c15d605006986efff1162f36a7a68",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2060,16 +2060,16 @@
         },
         {
             "name": "simplex/simplex",
-            "version": "v0.2.x-dev",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/freddiefrantzen/simplex.git",
-                "reference": "4522ec6b2535a0a6c94839a55a8d11c74b9a9f60"
+                "reference": "18c7037ec18a607e9cd5d17aea5b2db1a022db5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/4522ec6b2535a0a6c94839a55a8d11c74b9a9f60",
-                "reference": "4522ec6b2535a0a6c94839a55a8d11c74b9a9f60",
+                "url": "https://api.github.com/repos/freddiefrantzen/simplex/zipball/18c7037ec18a607e9cd5d17aea5b2db1a022db5a",
+                "reference": "18c7037ec18a607e9cd5d17aea5b2db1a022db5a",
                 "shasum": ""
             },
             "require": {
@@ -2118,7 +2118,7 @@
                 "micro framework",
                 "modular"
             ],
-            "time": "2018-03-07 10:15:20"
+            "time": "2018-03-07 13:38:40"
         },
         {
             "name": "symfony/cache",

@@ -17,7 +17,7 @@
     "require": {
         "php": ">=7.1",
         "php-di/php-di": "dev-master@dev",
-        "simplex/simplex": "v0.2.x-dev@dev",
+        "simplex/simplex": "dev-master#v0.2.0",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",
