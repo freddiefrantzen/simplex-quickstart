@@ -10,9 +10,9 @@ use Simplex\Quickstart\Module\Demo\Repository\PersonRepository;
 use Simplex\Quickstart\Shared\Controller\AppController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DemoController extends AppController
+final class DemoController extends AppController
 {
-    const LOCATION_HEADER_NAME = 'Location';
+    private const LOCATION_HEADER_NAME = 'Location';
 
     /** @var PersonRepository */
     private $personRepository;

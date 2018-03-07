@@ -21,17 +21,17 @@ use Symfony\Component\Finder\Finder;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class DoctrineOrmFactory
+final class DoctrineOrmFactory
 {
-    const DOCTRINE_CACHE_DIRECTORY = 'doctrine';
+    private const DOCTRINE_CACHE_DIRECTORY = 'doctrine';
 
-    const PROXY_DIRECTORY = self::DOCTRINE_CACHE_DIRECTORY . DIRECTORY_SEPARATOR . 'proxy';
+    private const PROXY_DIRECTORY = self::DOCTRINE_CACHE_DIRECTORY . DIRECTORY_SEPARATOR . 'proxy';
 
-    const PROXY_NAMESPACE = 'DoctrineProxies';
+    private const PROXY_NAMESPACE = 'DoctrineProxies';
 
-    const MODULES_DIRECTORY_PATH = __DIR__ . '/../../Module';
+    private const MODULES_DIRECTORY_PATH = __DIR__ . '/../../Module';
 
-    const ENTITY_DIRECTORY_NAME = 'Model';
+    private const ENTITY_DIRECTORY_NAME = 'Model';
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)

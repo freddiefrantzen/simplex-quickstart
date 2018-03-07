@@ -19,7 +19,7 @@ use Ramsey\Uuid\Uuid;
  *     )
  * )
  */
-class Person
+final class Person
 {
     /**
      * @var Uuid

@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Simplex\Exception\ResourceNotFoundException;
 use Simplex\Quickstart\Module\Demo\Model\Person;
 
-class PersonRepository extends EntityRepository
+final class PersonRepository extends EntityRepository
 {
     const EMAIL_FIELD = 'email';
 

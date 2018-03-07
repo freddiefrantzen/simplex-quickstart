@@ -16,6 +16,6 @@ class DemoModule implements Module
 {
     public function getServiceDefinitionsDirectory(): string
     {
-        return __DIR__ . '/config';
+        return __DIR__ . '/DependencyInjection';
     }
 }

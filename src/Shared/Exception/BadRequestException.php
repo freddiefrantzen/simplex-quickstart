@@ -4,7 +4,7 @@ namespace Simplex\Quickstart\Shared\Exception;
 
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-class BadRequestException extends \RuntimeException
+final class BadRequestException extends \RuntimeException
 {
     /** @var ConstraintViolationListInterface */
     private $violations;

@@ -55,6 +55,7 @@ abstract class AppController extends BaseController
         return $command;
     }
 
+    /** @param mixed $command */
     private function validateRequest($command): void
     {
         $violations = $this->validator->validate($command);

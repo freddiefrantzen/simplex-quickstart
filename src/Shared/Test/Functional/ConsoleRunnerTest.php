@@ -7,11 +7,11 @@ use Simplex\Quickstart\Shared\Console\CreateDatabaseCommand;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class ConsoleRunnerTest extends TestCase
+final class ConsoleRunnerTest extends TestCase
 {
     const PATH_TO_CONSOLE_RUNNER = 'bin/console';
 
-    public function testConsoleRunner()
+    public function test_console_runner()
     {
         $process = new Process(self::PATH_TO_CONSOLE_RUNNER);
         $process->run();

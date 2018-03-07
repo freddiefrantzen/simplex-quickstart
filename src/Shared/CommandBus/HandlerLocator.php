@@ -5,10 +5,10 @@ namespace Simplex\Quickstart\Shared\CommandBus;
 use League\Tactician\Handler\Locator\HandlerLocator as LocatorInterface;
 use Psr\Container\ContainerInterface;
 
-class HandlerLocator implements LocatorInterface
+final class HandlerLocator implements LocatorInterface
 {
-    const COMMAND_HANDLER_NAMESPACE_PART = 'CommandHandler';
-    const COMMAND_HANDLER_CLASS_SUFFIX = 'Handler';
+    private const COMMAND_HANDLER_NAMESPACE_PART = 'CommandHandler';
+    private const COMMAND_HANDLER_CLASS_SUFFIX = 'Handler';
 
     /** @var ContainerInterface */
     private $container;
@@ -18,6 +18,7 @@ class HandlerLocator implements LocatorInterface
         $this->container = $container;
     }
 
+    /** @return mixed */
     public function getHandlerForCommand($commandName)
     {
         $namespaceParts = explode('\\', $commandName);

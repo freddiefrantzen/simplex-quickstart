@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Simplex\Quickstart\Module\Demo\Command\Register;
 use Simplex\Quickstart\Module\Demo\Model\Person;
 
-class RegisterHandler
+final class RegisterHandler
 {
     /**
      * @var EntityManager

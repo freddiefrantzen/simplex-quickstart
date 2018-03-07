@@ -8,14 +8,14 @@ use Simplex\Quickstart\Shared\Testing\PhpWebServer;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class WebApplicationTest extends TestCase
+final class WebApplicationTest extends TestCase
 {
     use PhpWebServer;
 
     private $intervalDuration = 60000; // 60 ms
     private $numberOfRetries = 34; // max 2.04 seconds
 
-    public function testWebApplication()
+    public function test_web_application()
     {
         $acceptHeader = '"Accept: application/json"';
 

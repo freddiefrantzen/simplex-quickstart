@@ -8,7 +8,7 @@ use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\Locator\HandlerLocator;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
 
-class CommandBusFactory
+final class CommandBusFactory
 {
     public function create(HandlerLocator $locator)
     {

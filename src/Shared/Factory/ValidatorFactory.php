@@ -8,9 +8,9 @@ use Doctrine\Common\Cache\FilesystemCache;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class ValidatorFactory
+final class ValidatorFactory
 {
-    const VALIDATOR_CACHE_DIRECTORY = 'validator';
+    private const VALIDATOR_CACHE_DIRECTORY = 'validator';
 
     public function create(bool $enableCache, \SplFileInfo $cacheDir): ValidatorInterface
     {

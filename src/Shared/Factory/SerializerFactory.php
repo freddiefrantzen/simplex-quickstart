@@ -7,9 +7,9 @@ use Hateoas\HateoasBuilder;
 use Hateoas\UrlGenerator\SymfonyUrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
-class SerializerFactory
+final class SerializerFactory
 {
-    const SERIALIZER_CACHE_DIR = DIRECTORY_SEPARATOR . 'serializer';
+    private const SERIALIZER_CACHE_DIR = DIRECTORY_SEPARATOR . 'serializer';
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)

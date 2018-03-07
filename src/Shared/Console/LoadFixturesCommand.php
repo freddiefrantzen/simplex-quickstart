@@ -7,9 +7,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class LoadFixturesCommand extends Command
+final class LoadFixturesCommand extends Command
 {
-    const COMMAND_NAME = 'app:load-fixtures';
+    public const COMMAND_NAME = 'app:load-fixtures';
 
     /** @var FixtureLoader */
     private $loader;

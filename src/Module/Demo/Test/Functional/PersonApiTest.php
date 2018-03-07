@@ -6,7 +6,7 @@ use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use Simplex\Quickstart\Module\Demo\DataFixture\PersonLoader;
 use Simplex\Quickstart\Shared\Testing\FunctionalTest;
 
-class PersonApiTest extends FunctionalTest
+final class PersonApiTest extends FunctionalTest
 {
     public function test_it_can_be_queried_for_a_list_of_people()
     {

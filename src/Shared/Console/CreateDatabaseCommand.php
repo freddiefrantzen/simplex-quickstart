@@ -9,11 +9,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateDatabaseCommand extends Command
+final class CreateDatabaseCommand extends Command
 {
-    const COMMAND_NAME = 'orm:database:create';
+    public const COMMAND_NAME = 'orm:database:create';
 
-    const OPTION_IF_NOT_EXISTS = 'if-not-exists';
+    private const OPTION_IF_NOT_EXISTS = 'if-not-exists';
 
     /** @var Connection */
     private $connection;

@@ -5,7 +5,7 @@ namespace Simplex\Quickstart\Module\Demo\Command;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Register
+final class Register
 {
     /**
      * @var string

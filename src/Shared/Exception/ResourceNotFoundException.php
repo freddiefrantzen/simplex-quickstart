@@ -2,7 +2,7 @@
 
 namespace Simplex\Quickstart\Shared\Exception;
 
-class ResourceNotFoundException extends \Exception
+final class ResourceNotFoundException extends \Exception
 {
     public function __construct()
     {

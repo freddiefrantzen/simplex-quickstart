@@ -4,10 +4,10 @@ namespace Simplex\Quickstart\Shared;
 
 use Simplex\Module;
 
-class SharedModule implements Module
+final class SharedModule implements Module
 {
     public function getServiceDefinitionsDirectory(): ?string
     {
-        return __DIR__ . '/config';
+        return __DIR__ . '/DependencyInjection';
     }
 }

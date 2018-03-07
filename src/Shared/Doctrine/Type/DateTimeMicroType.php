@@ -9,11 +9,11 @@ use Doctrine\DBAL\Types\Type;
 /**
  * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
-class DateTimeMicroType extends Type
+final class DateTimeMicroType extends Type
 {
-    const NAME = 'datetime_micro';
+    public const NAME = 'datetime_micro';
 
-    const FORMAT = 'Y-m-d H:i:s.u';
+    private const FORMAT = 'Y-m-d H:i:s.u';
 
     public function getName(): string
     {

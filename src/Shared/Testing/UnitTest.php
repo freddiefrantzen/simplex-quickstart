@@ -6,7 +6,7 @@ use Helmich\Psr7Assert\Psr7Assertions;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 
-class UnitTest extends TestCase
+abstract class UnitTest extends TestCase
 {
     use Psr7Assertions;
 

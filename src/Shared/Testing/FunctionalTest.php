@@ -9,13 +9,13 @@ use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Simplex\Bootstrap;
 
-class FunctionalTest extends TestCase
+abstract class FunctionalTest extends TestCase
 {
     use HttpRequestCapabilities;
     use JsonAssertions;
     use Psr7Assertions;
 
-    const PATH_TO_PROJECT_ROOT = __DIR__ . '/../../../';
+    private const PATH_TO_PROJECT_ROOT = __DIR__ . '/../../../';
 
     protected $reloadDb = true;
 

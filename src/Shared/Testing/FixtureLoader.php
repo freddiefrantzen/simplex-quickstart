@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManager;
 use Simplex\Quickstart\Module\Demo\DataFixture\PersonLoader;
 
-class FixtureLoader
+final class FixtureLoader
 {
     /** @var EntityManager */
     private $entityManager;

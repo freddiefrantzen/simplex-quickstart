@@ -9,11 +9,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DropDatabaseCommand extends Command
+final class DropDatabaseCommand extends Command
 {
-    const COMMAND_NAME = 'orm:database:drop';
+    public const COMMAND_NAME = 'orm:database:drop';
 
-    const OPTION_IF_EXISTS = 'if-exists';
+    private const OPTION_IF_EXISTS = 'if-exists';
 
     /** @var Connection */
     private $connection;

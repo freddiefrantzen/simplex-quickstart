@@ -11,12 +11,12 @@ use Simplex\Quickstart\Shared\Exception\BadRequestException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-class HandleBadRequests
+final class HandleBadRequests
 {
-    const JSON_FORMAT = 'json';
+    private const JSON_FORMAT = 'json';
 
-    const PROPERTY_KEY = 'property';
-    const MESSAGE_KEY = 'message';
+    private const PROPERTY_KEY = 'property';
+    private const MESSAGE_KEY = 'message';
 
     /** @var SerializerInterface */
     private $serializer;
