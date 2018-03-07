@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestFailure;
 use PHPUnit\Framework\Warning;
 use PHPUnit\Runner\PhptTestCase;
 use PHPUnit\TextUI\ResultPrinter as PhpUnitResultPrinter;
+use PHPUnit\Util\Filter;
 use SebastianBergmann\Comparator\ComparisonFailure;
 
 /**
@@ -28,12 +29,13 @@ class TestResultPrinter extends PhpUnitResultPrinter
     private const GREEN = 'fg-green';
     private const CYAN_BOLD = 'fg-cyan, bold';
 
-    private const GREEN_BLOCK = 'fgg-green, bg-green';
-    private const RED_BLOCK = 'fgg-red, bg-red';
+    private const GREEN_BLOCK = 'fg-green, bg-green';
+    private const RED_BLOCK = 'fg-red, bg-red';
 
     private const CROSS_SYMBOL = '✘';
     private const TICK_SYMBOL = '✓';
 
+    /** @inheritdoc */
     public function addError(Test $test, \Exception $e, $time)
     {
         $this->printFailureInfoLine($test, $time);
@@ -48,7 +50,7 @@ class TestResultPrinter extends PhpUnitResultPrinter
         $this->printTestDescription($test, $time);
     }
 
-    private function printTestDescription(Test $test, $time)
+    private function printTestDescription(Test $test, $time): void
     {
         $this->writeWithColor(self::CYAN_BOLD, $this->getTestClass($test), false);
 
@@ -72,7 +74,7 @@ class TestResultPrinter extends PhpUnitResultPrinter
         return $test instanceof TestCase || $test instanceof  SelfDescribing;
     }
 
-    private function getTestDescription(Test $test)
+    private function getTestDescription(Test $test): string
     {
         if ($test instanceof TestCase) {
             return str_replace('_', ' ', $test->getName());
@@ -92,6 +94,7 @@ class TestResultPrinter extends PhpUnitResultPrinter
         return ' ' . (string) $ms . 'ms';
     }
 
+    /** @inheritdoc */
     public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
         $this->printFailureInfoLine($test, $time);
@@ -99,26 +102,31 @@ class TestResultPrinter extends PhpUnitResultPrinter
         $this->lastTestFailed = true;
     }
 
+    /** @inheritdoc */
     public function addWarning(Test $test, Warning $e, $time)
     {
         $this->lastTestFailed = true;
     }
 
+    /** @inheritdoc */
     public function addIncompleteTest(Test $test, \Exception $e, $time)
     {
         $this->lastTestFailed = true;
     }
 
+    /** @inheritdoc */
     public function addRiskyTest(Test $test, \Exception $e, $time)
     {
         $this->lastTestFailed = true;
     }
 
+    /** @inheritdoc */
     public function addSkippedTest(Test $test, \Exception $e, $time)
     {
         $this->lastTestFailed = true;
     }
 
+    /** @inheritdoc */
     public function endTest(Test $test, $time)
     {
         if (!$this->lastTestFailed) {
@@ -140,7 +148,7 @@ class TestResultPrinter extends PhpUnitResultPrinter
         $this->write($test->getActualOutput());
     }
 
-    private function printSuccessLineInfo(Test $test, $time): void
+    private function printSuccessLineInfo(Test $test, float $time): void
     {
         $this->write(self::INDENT);
         $this->writeWithColor(self::GREEN, self::TICK_SYMBOL . ' ', false);
@@ -160,20 +168,26 @@ class TestResultPrinter extends PhpUnitResultPrinter
     {
         $exception = $defect->thrownException();
 
-        $this->printExceptions($exception);
-
         if (!$exception instanceof ExpectationFailedException) {
+            $this->printExceptions($exception);
             $this->printGotoTip($exception);
             return;
         }
 
         $comparisonFailure = $exception->getComparisonFailure();
 
-        if (null === $comparisonFailure) {
+        if (null === $comparisonFailure || !$this->hasComparisonDetail($comparisonFailure)) {
+            $this->printExceptions($exception);
             return;
         }
 
+        $this->write(self::LINE_FEED);
+
         $this->printComparison($comparisonFailure);
+
+        $this->write(self::INDENT);
+
+        $this->writeWithColor(self::WHITE, Filter::getFilteredStacktrace($exception));
     }
 
     private function printExceptions(\Throwable $exception): void
@@ -211,15 +225,17 @@ class TestResultPrinter extends PhpUnitResultPrinter
 
     private function printComparison(ComparisonFailure $failure): void
     {
+        $this->writeWithColor(self::WHITE, self::INDENT . $failure->getMessage());
+
+        $this->write(self::LINE_FEED);
+
         $this->writeWithColor(self::CYAN_BOLD, self::INDENT . "Expected:");
 
-        $expected = $this->getExpectedAsString($failure);
-        $this->printComparisonDetail($expected, self::GREEN_BLOCK);
+        $this->printComparisonDetail($failure->getExpectedAsString(), self::GREEN_BLOCK);
 
         $this->writeWithColor(self::CYAN_BOLD, self::INDENT . "Actual");
 
-        $actual = $this->getActualAsString($failure);
-        $this->printComparisonDetail($actual, self::RED_BLOCK);
+        $this->printComparisonDetail($failure->getActualAsString(), self::RED_BLOCK);
     }
 
     private function printComparisonDetail(string $detail, string $blockColor): void
@@ -232,29 +248,15 @@ class TestResultPrinter extends PhpUnitResultPrinter
             $this->write(self::INDENT);
             $this->writeWithColor($blockColor, ' ', false);
             $this->write('  ');
-            $this->writeWithColor(self::WHITE_BOLD, $line);
+            $this->writeWithColor(self::WHITE_BOLD, $line, false);
+            $this->write(self::LINE_FEED);
         }
+
+        $this->write(self::LINE_FEED);
     }
 
-    private function getExpectedAsString(ComparisonFailure $failure): string
+    private function hasComparisonDetail(ComparisonFailure $failure): bool
     {
-        $expected = $failure->getExpectedAsString();
-
-        if (empty($expected)) {
-            $expected = (string) $failure->getExpected();
-        }
-
-        return $expected;
-    }
-
-    private function getActualAsString(ComparisonFailure $failure): string
-    {
-        $actual = $failure->getActualAsString();
-
-        if (empty($actual)) {
-            $actual = (string) $failure->getActual();
-        }
-
-        return $actual;
+        return !empty($failure->getExpectedAsString());
     }
 }
