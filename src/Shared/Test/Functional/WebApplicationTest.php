@@ -17,6 +17,10 @@ final class WebApplicationTest extends TestCase
 
     public function test_web_application()
     {
+        if (getenv('SCRUTINIZER')) {
+            $this->markTestSkipped();
+        }
+
         $acceptHeader = '"Accept: application/json"';
 
         /** @noinspection PhpUndefinedConstantInspection */
