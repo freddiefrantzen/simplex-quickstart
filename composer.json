@@ -16,8 +16,8 @@
     },
     "require": {
         "php": ">=7.1",
-        "php-di/php-di": "dev-master@dev",
-        "simplex/simplex": "dev-master#v0.2.0",
+        "php-di/php-di": "^6.1",
+        "simplex/simplex": "0.2.1",
         "doctrine/data-fixtures": "^1.2",
         "doctrine/orm": "^2.5",
         "league/tactician": "^1.0",
@@ -32,7 +32,7 @@
         "mockery/mockery": "^0.9.9",
         "phpunit/phpunit": "^6.0",
         "vlucas/phpdotenv": "^2.4",
-        "mikey179/vfsStream": "^1.6",
+        "mikey179/vfsstream": "^1.6",
         "squizlabs/php_codesniffer": "^3.1",
         "phpmd/phpmd": "^2.6"
     },
